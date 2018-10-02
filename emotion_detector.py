@@ -2,22 +2,50 @@ import cv2
 import numpy as np
 from keras.models import load_model
 from helpers import *
+from statistics import mode, StatisticsError
+from threading import Thread
 
 
 class EmotionDetector():
     def __init__(self, **kwargs):
         self.subscribers = []
         self.emotion_offsets = kwargs["image_offset"]
-        self.face_detection = cv2.CascadeClassifier(kwargs["detection_model_path"])
-        self.emotion_classifier = load_model(kwargs["emotion_model_path"], compile=False)
+        self.face_detection = cv2.CascadeClassifier(
+            kwargs["detection_model_path"])
+        self.emotion_classifier = load_model(
+            kwargs["emotion_model_path"], compile=False)
         self.emotion_target_size = self.emotion_classifier.input_shape[1:3]
+        self.emotion_cache = []
+        self.min_cache_size = 12
+        self.previous_emotion = ''
 
-    def on_emotion_detected(self, callback):
-        self.subscribers.append(callback)
+    def on_emotion_detected(self, callback, **kwargs):
+        self.subscribers.append((callback, kwargs))
 
     def emotion_detected(self, emotion):
-        for callback in self.subscribers:
-            callback(emotion)
+        self.emotion_cache.append(emotion)
+
+        if len(self.emotion_cache) < self.min_cache_size:
+            # Wait until enough emotions are stored.
+            return
+
+        try:
+            most_common_emotion = mode(self.emotion_cache)
+        except StatisticsError:
+            # If there are two or more emotions that are equally present
+            # add another emotion to the cache to try get a majority.
+            return
+
+        self.emotion_cache.clear()
+
+        if self.previous_emotion is most_common_emotion.name:
+            # Emotion did not change, don't change the LED.
+            return
+
+        self.previous_emotion = most_common_emotion.name
+
+        for callback, kwargs in self.subscribers:
+            callback(most_common_emotion, kwargs)
 
     def start(self):
         video_capture = cv2.VideoCapture(0)
@@ -37,7 +65,8 @@ class EmotionDetector():
                 gray_face = gray_image[y1:y2, x1:x2]
 
                 try:
-                    gray_face = cv2.resize(gray_face, (self.emotion_target_size))
+                    gray_face = cv2.resize(
+                        gray_face, (self.emotion_target_size))
                 except:
                     continue
 
