@@ -23,7 +23,11 @@ class EmotionDetector():
         video_capture = cv2.VideoCapture(0)
 
         while True:
-            bgr_image = video_capture.read()[1]
+            has_frame, bgr_image = video_capture.read()
+
+            if not has_frame:
+                continue
+
             gray_image = cv2.cvtColor(bgr_image, cv2.COLOR_BGR2GRAY)
             faces = self.face_detection.detectMultiScale(gray_image, 1.3, 5)
 
