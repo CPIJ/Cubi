@@ -18,6 +18,7 @@ class EmotionDetector():
         self.emotion_cache = []
         self.min_cache_size = 12
         self.previous_emotion = ''
+        self.is_running = False
 
     def on_emotion_detected(self, callback, **kwargs):
         self.subscribers.append((callback, kwargs))
@@ -47,10 +48,14 @@ class EmotionDetector():
         for callback, kwargs in self.subscribers:
             callback(most_common_emotion, kwargs)
 
+    def stop(self):
+        self.is_running = False
+
     def start(self):
         video_capture = cv2.VideoCapture(0)
+        self.is_running = True
 
-        while True:
+        while self.is_running:
             has_frame, bgr_image = video_capture.read()
 
             if not has_frame:
