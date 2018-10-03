@@ -27,8 +27,7 @@ class SocketServer():
         self.server.close()
 
     def restart(self):
-        self.is_running = False
-        self.thread.is_alive = False
+        self.close()
         self.start()
 
     def _on_message(self, message):
