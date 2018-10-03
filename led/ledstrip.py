@@ -39,9 +39,9 @@ class LedStrip:
             elif b > color[1]:
                 g -= 1
 
-            if b < color[1]:
+            if b < color[2]:
                 b += 1
-            elif b > color[1]:
+            elif b > color[2]:
                 b -= 1
 
             count += 1
