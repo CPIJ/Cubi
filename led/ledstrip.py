@@ -62,6 +62,6 @@ if __name__ == '__main__':
 
     sleep(5)
 
-    strip.transition_to(255, 0, 0)
+    strip.transition_to((255, 0, 0), 100)
 
     strip.stop()
