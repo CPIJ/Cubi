@@ -3,9 +3,11 @@ import json
 
 SocketConfig = namedtuple('SocketConfig', ['host', 'port'])
 
-with open('config/server-config.json') as file:
-    socket_config = json.load(file)
+def get_server_config(name):
+    with open('config/server-config.json') as file:
+        socket_config = json.load(file)
+        return SocketConfig(socket_config[name]["host"], socket_config[name]["port"])
 
-LED_SERVER = SocketConfig(socket_config["LED_SERVER"]["host"], socket_config["LED_SERVER"]["port"])
-LOGIC_SERVER = SocketConfig(socket_config["LOGIC_SERVER"]["host"], socket_config["LOGIC_SERVER"]["port"])
-IO_SERVER = SocketConfig(socket_config["IO_SERVER"]["host"], socket_config["IO_SERVER"]["port"])
+LED_SERVER = get_server_config("LED_SERVER")
+LOGIC_SERVER = get_server_config("LOGIC_SERVER")
+IO_SERVER = get_server_config("IO_SERVER")
