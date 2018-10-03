@@ -14,7 +14,7 @@ class CommandType(Enum):
 
 
 def serialize_command(command):
-    return f'{command.action}:{command.parameter}'
+    return str(command.action) + ':' + str(command.parameter)
 
 
 def parse_command(message):

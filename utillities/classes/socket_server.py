@@ -15,7 +15,7 @@ class SocketServer():
         self.callbacks.append(callback)
 
     def start(self):
-        print(f'Starting server on port {self.port}')
+        print('Starting server on port ' + str(self.port))
         self.is_running = True
 
         thread = Thread(target=self._start)
@@ -38,7 +38,7 @@ class SocketServer():
 
         print('Waiting for client to connect...')
         client, address = self.server.accept()
-        print(f'new client connected: {client}, {address}')
+        print('new client connected: ' + str(client) + ', ' + str(address))
 
         while self.is_running:
             message = client.recv(1024).decode()
