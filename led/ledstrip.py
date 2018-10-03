@@ -30,16 +30,21 @@ class LedStrip:
         g = (curr_col >> 8) & 0xFF
         r = (curr_col >> 16)
 
+        count = 0
+
         while r != color[0] or g != color[1] or b != color[2]:
             r = r + 1 if r < color[0] else r - 1
             g = g + 1 if g < color[1] else g - 1
             b = b + 1 if b < color[2] else b - 1
 
-            c = colors.convert((r, g, b))
+            count += 1
 
-            for i in range(self.controller.numPixels()):
-                self.controller.setPixelColor(i, c)
-                self.controller.show()
+            if count % 10 == 0:
+                c = colors.convert((r, g, b))
+
+                for i in range(self.controller.numPixels()):
+                    self.controller.setPixelColor(i, c)
+                    self.controller.show()
 
 
 if __name__ == '__main__':
