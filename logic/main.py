@@ -1,7 +1,7 @@
 from utillities.classes.socketclient import SocketClient
 from utillities.classes.socketserver import SocketServer
 from ai.emotion_detector import EmotionDetector
-from utillities.config import LED_SERVER
+from config.socket_config import LED_SERVER, LOGIC_SERVER
 import utillities.socket_protocol as socket_protocol
 
 detector = None
@@ -33,7 +33,7 @@ def handle_socket_message(message):
 def start_server():
     global socket_server
 
-    socket_server = SocketServer(9000)
+    socket_server = SocketServer(LOGIC_SERVER.port)
     socket_server.message_recevied(handle_socket_message)
     socket_server.start()
 
@@ -53,7 +53,7 @@ def init_detector():
 def main():
     global ledstrip_client
     
-    ledstrip_client = SocketClient(LED_SERVER.ip, LED_SERVER.port)
+    ledstrip_client = SocketClient(LED_SERVER.host, LED_SERVER.port)
     start_server()
     init_detector()
 
