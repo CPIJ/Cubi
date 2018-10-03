@@ -1,6 +1,5 @@
-import utillities.socket_protocol as socket_protocol
 import argparse
-
+import utillities.socket_protocol as socket_protocol
 from utillities.socket_protocol import Command, CommandType
 from utillities.classes.socket_client import SocketClient
 from utillities.classes.socket_server import SocketServer
