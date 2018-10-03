@@ -33,9 +33,20 @@ class LedStrip:
         count = 0
 
         while r != color[0] or g != color[1] or b != color[2]:
-            r = r + 1 if r < color[0] else r - 1
-            g = g + 1 if g < color[1] else g - 1
-            b = b + 1 if b < color[2] else b - 1
+            if r < color[0]:
+                r += 1
+            elif r > color[0]:
+                r -= 1
+
+            if g < color[1]:
+                g += 1
+            elif b > color[1]:
+                g -= 1
+
+            if b < color[1]:
+                b += 1
+            elif b > color[1]:
+                b -= 1
 
             print((r,g,b))
 
