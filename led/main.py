@@ -1,56 +1,26 @@
-#Imports modules
-import socket
-import colors
-import time
-import ledstrip
-import RPi.GPIO as GPIO
-import os
+import utillities.colors as colors
+import utillities.socket_protocol as socket_protocol
+from utillities.classes.socket_server import SocketServer
+from config.socket_config import LED_SERVER as server_config
+from ledstrip import LedStrip
 
-from signal import pause
-
-listensocket = socket.socket() #Creates an instance of socket
-Port = 8000 #Port to host server on
-maxConnections = 999
-IP = socket.gethostname() #IP address of local machine
-
-listensocket.bind(('',Port))
+strip = LedStrip()
+strip.start()
 
 
-while True:
-	#Starts server
-	listensocket.listen(maxConnections)
-	print("Server started at " + IP + " on port " + str(Port))
+def handle_message(message, sender):
+    command = socket_protocol.parse_command(message)
 
-	#Accepts the incomming connection
-	(clientsocket, address) = listensocket.accept()
-	print("New connection made!")
+    if command.action == "SET_COLOR":
+        color = eval(command.parameter)
+        strip.transition_to(color, 100)
 
-	running = True
+    if command.action == "EXIT":
+        server.close()
+        strip.transition_to(colors.get("black"), 100)
 
-	strip = ledstrip.LedStrip()
-		
-	strip.start()
 
-	while running:
-		message = clientsocket.recv(1024).decode() #Gets the incomming message
-		print(message)
-		if not message == "":
-			try:
-				if message == "exit":
-					print(message)
-					clientsocket.close()
-					strip.transition_to(colors.get("black"), 100)
-					running = False
-					
-				if message is "shutdown":
-					os.system("sudo shutdown -h now")
-					
-				if message.startswith("Color:"):
-					s = message.split(":")
-					c = eval(s[1])
-					print(c)
-					strip.transition_to(c, 100)
-					
-			except ValueError:
-				pass
-	
+if __name__ == "__main__":
+    server = SocketServer(server_config.port, "LED_SERVER")
+    server.message_received(handle_message)
+    server.start()

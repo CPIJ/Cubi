@@ -25,18 +25,19 @@ class SocketServer():
 
     def close(self):
         self.is_running = False
+        self.server.close()
 
     def _on_message(self, message):
         for callback in self.callbacks:
             callback(message, self.name)
 
     def _start(self):
-        server = socket.socket()
-        server.bind(('', self.port))
-        server.listen(self.max_connections)
+        self.server = socket.socket()
+        self.server.bind(('', self.port))
+        self.server.listen(self.max_connections)
 
         print('Waiting for client to connect...')
-        client, address = server.accept()
+        client, address = self.server.accept()
         print(f'new client connected: {client}, {address}')
 
         while self.is_running:
