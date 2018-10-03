@@ -41,5 +41,4 @@ class SocketServer():
 
         while self.is_running:
             message = client.recv(1024).decode()
-            print(message)
             self._on_message(message)
