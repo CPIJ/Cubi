@@ -75,9 +75,14 @@ if __name__ == '__main__':
 
     strip.transition_to((255, 255, 255), 100)
 
-    sleep(5)
-    print('sleep 5 sec')
+    print('sleep 2 sec')
+    sleep(2)
+    
 
     strip.transition_to((255, 0, 0), 100)
 
+    print('sleep 5 sec')
+    sleep(2)
+    
+    print('stop')
     strip.stop()
