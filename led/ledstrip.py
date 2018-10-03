@@ -20,7 +20,7 @@ class LedStrip:
     def stop(self):
         assert self.is_on
 
-        self.transition_to(colors.get('black'), 0)
+        self.transition_to((0,0,0), 0)
         self.is_on = False
 
     def transition_to(self, color, ms):        
