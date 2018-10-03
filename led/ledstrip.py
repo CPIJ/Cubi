@@ -23,21 +23,21 @@ class LedStrip:
         self.transition_to(colors.get('black'), 0)
         self.is_on = False
 
-    def transition_to(self, color, ms):
-        for i in range(self.controller.numPixels()):
-            curr_col = self.controller.getPixelColor(i)
+    def transition_to(self, color, ms):        
+        curr_col = self.controller.getPixelColor(0)
 
-            b = curr_col & 0xFF
-            g = (curr_col >> 8) & 0xFF
-            r = (curr_col >> 16)
+        b = curr_col & 0xFF
+        g = (curr_col >> 8) & 0xFF
+        r = (curr_col >> 16)
 
-            while r != color[0] or g != color[1] or b != color[2]:
-                r = r + 1 if r < color[0] else r - 1
-                g = g + 1 if g < color[1] else g - 1
-                b = b + 1 if b < color[2] else b - 1
+        while r != color[0] or g != color[1] or b != color[2]:
+            r = r + 1 if r < color[0] else r - 1
+            g = g + 1 if g < color[1] else g - 1
+            b = b + 1 if b < color[2] else b - 1
 
-                c = colors.convert((r, g, b))
+            c = colors.convert((r, g, b))
 
+            for i in range(self.controller.numPixels()):
                 self.controller.setPixelColor(i, c)
                 self.controller.show()
 
