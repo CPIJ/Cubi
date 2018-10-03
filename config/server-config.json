@@ -1,6 +1,6 @@
 {
     "LED_SERVER": {
-        "host": "192.168.250.2",
+        "host": "192.168.70.147",
         "port": 8000
     },
     "LOGIC_SERVER": {

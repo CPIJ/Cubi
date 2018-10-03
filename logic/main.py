@@ -1,10 +1,12 @@
+import utillities.socket_protocol as socket_protocol
+import argparse
+
 from utillities.classes.socket_client import SocketClient
 from utillities.classes.socket_server import SocketServer
 from ai.emotion_detector import EmotionDetector
 from config.socket_config import get_server_config
 from utillities.socket_protocol import CommandType
-import utillities.socket_protocol as socket_protocol
-import argparse
+
 
 detector = None
 ledstrip_client = None
