@@ -20,8 +20,8 @@ class EmotionDetector():
         self.previous_emotion = ''
         self.is_running = False
 
-    def on_emotion_detected(self, callback, **kwargs):
-        self.subscribers.append((callback, kwargs))
+    def on_emotion_detected(self, callback):
+        self.subscribers.append(callback)
 
     def emotion_detected(self, emotion):
         self.emotion_cache.append(emotion)
@@ -45,8 +45,8 @@ class EmotionDetector():
 
         self.previous_emotion = most_common_emotion.name
 
-        for callback, kwargs in self.subscribers:
-            callback(most_common_emotion, kwargs)
+        for callback in self.subscribers:
+            callback(most_common_emotion)
 
     def stop(self):
         self.is_running = False

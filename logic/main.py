@@ -2,6 +2,7 @@ from utillities.classes.socket_client import SocketClient
 from utillities.classes.socket_server import SocketServer
 from ai.emotion_detector import EmotionDetector
 from config.socket_config import get_server_config
+from utillities.socket_protocol import CommandType
 import utillities.socket_protocol as socket_protocol
 import argparse
 
@@ -10,9 +11,12 @@ ledstrip_client = None
 socket_server = None
 is_test = False
 
-def handle_emotion(emotion, kwargs):
-    client = kwargs['client']
-    client.send(f'Color:{str(emotion.color)}')
+
+def handle_emotion(emotion):
+    command = socket_protocol.create_command(CommandType.set_led, str(emotion.color))
+    serialized = socket_protocol.serialize_command(command)
+
+    ledstrip_client.send(serialized)
 
 
 def handle_socket_message(message):
@@ -34,9 +38,9 @@ def handle_socket_message(message):
 def start_server():
     global socket_server
 
-    server_config = get_server_config('LED_SERVER', is_test)
+    server_config = get_server_config('LOGIC_SERVER', is_test)
 
-    socket_server = SocketServer(server_config.port, "LED_SERVER")
+    socket_server = SocketServer(server_config.port, "LOGIC_SERVER")
     socket_server.message_received(handle_socket_message)
     socket_server.start()
 
@@ -65,11 +69,10 @@ def main():
     start_server()
     init_detector()
 
+    detector.start()
+
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--test')
-    args = parser.parse_args()
-    is_test = '--test' in args
+    is_test = True
 
     main()
