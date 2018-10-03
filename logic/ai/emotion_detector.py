@@ -62,7 +62,10 @@ class EmotionDetector():
                 continue
 
             gray_image = cv2.cvtColor(bgr_image, cv2.COLOR_BGR2GRAY)
-            face = self.face_detection.detectMultiScale(gray_image, 1.3, 5)[0]
+            face = next(iter(self.face_detection.detectMultiScale(gray_image, 1.3, 5)), None)
+
+            if face is None:
+                continue
 
             x1, x2, y1, y2 = apply_offsets(face, self.emotion_offsets)
             gray_face = gray_image[y1:y2, x1:x2]
