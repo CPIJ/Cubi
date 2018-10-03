@@ -37,7 +37,7 @@ def start_server():
     server_config = get_server_config('LED_SERVER', is_test)
 
     socket_server = SocketServer(server_config.port, "LED_SERVER")
-    socket_server.message_recevied(handle_socket_message)
+    socket_server.message_received(handle_socket_message)
     socket_server.start()
 
 
