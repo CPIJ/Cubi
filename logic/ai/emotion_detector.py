@@ -5,6 +5,9 @@ from ai.helpers import *
 from statistics import mode, StatisticsError
 from threading import Thread
 from utillities.models.emotion import basic_emotions
+from utillities.logger import Logger
+
+log = Logger(__name__)
 
 class EmotionDetector():
     def __init__(self, **kwargs):
@@ -49,13 +52,16 @@ class EmotionDetector():
             callback(most_common_emotion)
 
     def stop(self):
+        log.debug('Set is running to false')
         self.is_running = False
 
     def start(self):
+        log.debug('Set is running to true')
         self.is_running = True
 
     def init(self):
         video_capture = cv2.VideoCapture(1)
+        has_frame, bgr_image = video_capture.read()
 
         while True:
             if not self.is_running:

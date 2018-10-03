@@ -33,9 +33,9 @@ def close():
 def handle_emotion(emotion):
     global training_timer
     global training_emotion
+    global state
 
     if state == "TRAINING":
-        log.debug('Handle emotion in trainingmode')
         if emotion == training_emotion:
             log.debug('Guessed correctly')
             command = Command.create(CommandType.set_color, colors.get('green')).serialize()
@@ -47,6 +47,9 @@ def handle_emotion(emotion):
     elif state == "CONVERSATION":
         command = Command.create(CommandType.set_color, str(emotion.color)).serialize()
         ledstrip_client.send(command)
+    
+    else:
+        log.error('Unkown state, cannot handle emotion')
     
 
 
@@ -71,17 +74,15 @@ def training_cycle():
 
 def timeout():
     detector.stop()
-
     command = Command.create(CommandType.set_color,str((255, 0, 0))).serialize()
-
     ledstrip_client.send(command)
-
     sleep(3)
-
     training_cycle()
 
 
 def handle_socket_message(message, sender):
+    global state
+
     command = Command.parse(message)
 
     if command.action == "EXIT":
@@ -89,6 +90,8 @@ def handle_socket_message(message, sender):
 
     elif command.action == "SET_MODE":
         state = command.parameter
+
+        log.debug('Got mode change: ' + state)
 
         if state == "CONVERSATION":
             detector.start()
@@ -137,12 +140,16 @@ def init_detector():
 
     detector.on_emotion_detected(handle_emotion)
 
+    detector.init()
+
 
 def main():
     start_ledstrip_client()
+
+    ledstrip_client.send(Command.create(CommandType.set_color, '(0,0,0)').serialize())
+
     start_server()
     init_detector()
-    detector.init()
 
 
 if __name__ == "__main__":
