@@ -4,16 +4,18 @@ from threading import Thread
 
 
 class SocketServer():
-    def __init__(self, port):
+    def __init__(self, port, name):
         self.callbacks = []
         self.port = port
+        self.name = name
         self.max_connections = 999
         self.is_running = False
 
-    def message_recevied(self, callback):
+    def message_received(self, callback):
         self.callbacks.append(callback)
 
     def start(self):
+        print(f'Starting server on port {self.port}')
         self.is_running = True
 
         thread = Thread(target=self._start)
@@ -26,7 +28,7 @@ class SocketServer():
 
     def _on_message(self, message):
         for callback in self.callbacks:
-            callback(message)
+            callback(message, self.name)
 
     def _start(self):
         server = socket.socket()

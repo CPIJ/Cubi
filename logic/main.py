@@ -1,5 +1,5 @@
-from utillities.classes.socketclient import SocketClient
-from utillities.classes.socketserver import SocketServer
+from utillities.classes.socket_client import SocketClient
+from utillities.classes.socket_server import SocketServer
 from ai.emotion_detector import EmotionDetector
 from config.socket_config import get_server_config
 import utillities.socket_protocol as socket_protocol
@@ -36,7 +36,7 @@ def start_server():
 
     server_config = get_server_config('LED_SERVER', is_test)
 
-    socket_server = SocketServer(server_config.port)
+    socket_server = SocketServer(server_config.port, "LED_SERVER")
     socket_server.message_recevied(handle_socket_message)
     socket_server.start()
 
