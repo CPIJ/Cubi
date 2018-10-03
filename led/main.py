@@ -11,6 +11,8 @@ strip.start()
 def handle_message(message, sender):
     command = Command.parse(message)
 
+    print(command.serialize())
+
     if command.action == "SET_COLOR":
         color = eval(command.parameter)
         strip.transition_to(color, 100)
