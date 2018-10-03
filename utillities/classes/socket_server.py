@@ -23,14 +23,13 @@ class SocketServer():
 
     def close(self):
         self.is_running = False
-        self.thread.join()
+        self.thread.is_alive = False
         self.server.close()
 
     def restart(self):
         self.is_running = False
-        self.thread.join()
+        self.thread.is_alive = False
         self.start()
-
 
     def _on_message(self, message):
         for callback in self.callbacks:
