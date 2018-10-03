@@ -16,8 +16,8 @@ def handle_message(message, sender):
         strip.transition_to(color, 100)
 
     if command.action == "EXIT":
-        server.restart()
         strip.transition_to(colors.get("black"), 100)
+        server.restart()
 
 
 if __name__ == "__main__":

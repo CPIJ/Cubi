@@ -10,6 +10,9 @@ class SocketServer():
         self.name = name
         self.max_connections = 999
         self.is_running = False
+        self.server = socket.socket()
+        self.server.bind(('', self.port))
+        self.server.listen(self.max_connections)
 
     def message_received(self, callback):
         self.callbacks.append(callback)
@@ -27,8 +30,7 @@ class SocketServer():
         self.server.close()
 
     def restart(self):
-        self.is_running = False
-        self.thread.is_alive = False
+        self.close()
         self.start()
 
     def _on_message(self, message):
@@ -36,10 +38,6 @@ class SocketServer():
             callback(message, self.name)
 
     def _start(self):
-        self.server = socket.socket()
-        self.server.bind(('', self.port))
-        self.server.listen(self.max_connections)
-
         print('Waiting for client to connect...')
         client, address = self.server.accept()
         print('new client connected: ' + str(client) + ', ' + str(address))
