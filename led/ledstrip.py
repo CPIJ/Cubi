@@ -52,6 +52,9 @@ class LedStrip:
                 for i in range(self.controller.numPixels()):
                     self.controller.setPixelColor(i, c)
                     self.controller.show()
+                    
+            if count % 1000 == 0:
+                break
 
         self.current_color = color
 
