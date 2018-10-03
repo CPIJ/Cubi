@@ -48,7 +48,7 @@ class LedStrip:
 
             print((r, g, b, count))
 
-            if count == 16
+            if count == 16:
                 c = colors.convert((r, g, b))
                 count = 0
 
