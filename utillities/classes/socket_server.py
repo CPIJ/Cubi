@@ -45,3 +45,4 @@ class SocketServer():
         while self.is_running:
             message = client.recv(1024).decode()
             self._on_message(message)
+        
