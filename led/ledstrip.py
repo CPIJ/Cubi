@@ -36,6 +36,8 @@ class LedStrip:
                 g = g + 1 if g < color[1] else g - 1
                 b = b + 1 if b < color[2] else b - 1
 
+                print((r,g,b))
+
                 c = colors.convert((r, g, b))
 
                 self.controller.setPixelColor(i, c)
