@@ -48,8 +48,9 @@ class LedStrip:
 
             print((r, g, b, count))
 
-            if count % 16 == 0:
+            if count == 16
                 c = colors.convert((r, g, b))
+                count = 0
 
                 for i in range(self.controller.numPixels()):
                     self.controller.setPixelColor(i, c)
