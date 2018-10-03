@@ -1,12 +1,11 @@
 import utillities.socket_protocol as socket_protocol
 import argparse
 
+from utillities.socket_protocol import Command, CommandType
 from utillities.classes.socket_client import SocketClient
 from utillities.classes.socket_server import SocketServer
 from ai.emotion_detector import EmotionDetector
 from config.socket_config import get_server_config
-from utillities.socket_protocol import CommandType
-
 
 detector = None
 ledstrip_client = None
@@ -14,27 +13,30 @@ socket_server = None
 is_test = False
 
 
-def handle_emotion(emotion):
-    command = socket_protocol.create_command(CommandType.set_led, str(emotion.color))
-    serialized = socket_protocol.serialize_command(command)
+def close():
+    set_to_black_cmd = Command.create(CommandType.set_color, '(0, 0, 0)').serialize()
+    exit_cmd = Command.create(CommandType.exit).serialize()
 
-    ledstrip_client.send(serialized)
+    ledstrip_client.send(set_to_black_cmd)
+    ledstrip_client.send(exit_cmd)
+
+
+def handle_emotion(emotion):
+    command = Command.create(CommandType.set_color,str(emotion.color)).serialize()
+    ledstrip_client.send(command)
 
 
 def handle_socket_message(message, sender):
-    global detector
+    command = Command.parse(message)
 
-    command = socket_protocol.parse_command(message)
-
-    switch = {
-        "SET_MODE:CONVERSATION": lambda: detector.start(),
-        "SET_MODE:TRAINING": lambda: detector.stop(),
-        "EXIT": lambda: print('Zet em uit'),
-    }
-
-    func = switch.get(message, lambda: print('Unknown command'))
-
-    func()
+    if command.action == "EXIT":
+        close()
+    
+    elif command.action == "SET_MODE":
+        print('set mode: ' + command.parameter)
+    
+    else:
+        print('Unkown command')
 
 
 def start_server():

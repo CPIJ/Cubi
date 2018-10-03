@@ -18,14 +18,19 @@ class SocketServer():
         print('Starting server on port ' + str(self.port))
         self.is_running = True
 
-        thread = Thread(target=self._start)
-        thread.start()
-
-        return thread
+        self.thread = Thread(target=self._start)
+        self.thread.start()
 
     def close(self):
         self.is_running = False
+        self.thread.join()
         self.server.close()
+
+    def restart(self):
+        self.is_running = False
+        self.thread.join()
+        self.start()
+
 
     def _on_message(self, message):
         for callback in self.callbacks:
