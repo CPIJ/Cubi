@@ -8,7 +8,6 @@ from signal import pause
 from statistics import mode, StatisticsError
 from aiy.pins import BUTTON_GPIO_PIN
 from threading import Thread
-
 from gpiozero import Button
 from gpiozero import LED
 
