@@ -5,7 +5,7 @@ SocketConfig = namedtuple('SocketConfig', ['host', 'port'])
 
 
 def get_server_config(name, is_test=False):
-    with open('config/server-config.json') as file:
+    with open('./config/server-config.json') as file:
         socket_config = json.load(file)
         if not is_test:
             return SocketConfig(socket_config[name]["host"], socket_config[name]["port"])
