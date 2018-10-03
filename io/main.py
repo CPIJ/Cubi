@@ -75,30 +75,19 @@ def timeout():
 	Learningmode_started = False
 	learning_mode_thread = Thread(target=start_learning_mode(system_state))
 	learning_mode_thread.start()
-	
-def on_button_pressed():
-	pass
-	#timer = None
-	#while button.is_pressed:
-		#if system_state == "PowerOn" or system_state == "ConversationMode" or system_state == "LearningMode":
-			#timer = Timer(5, lifecycle.poweroff)
-			#timer.start()
-			
-			#timer.join()
-			#os.system("sudo shutdown -r now")
-	#timer.stop
-	
+		
 	
 def start_learning_mode(system_state):
 	global random_chosen_color
 	global timer
 	global Learningmode_started
+	
 	if Learningmode_started == False:
 		detector.stop()
 		Learningmode_started = True
 		random_chosen_color = None
 		correct_gues = False
-		timer_ended = False;
+		timer_ended = False
 		
 		#vraag een random kleur op 
 		random_chosen_color = random.choice(Colors)

@@ -10,8 +10,7 @@ from music import poweroff_theme, poweron_theme
 leds = Leds()
 ledstrip = LedStrip()
 ledstrip.start()
-
-
+		
 def startup():
 	print("---------starting up--------")
 	ledstrip.transition_to_string("white")
