@@ -24,10 +24,7 @@ class LedStrip:
         self.is_on = False
 
     def transition_to(self, color, ms):        
-        b = self.current_color[0]
-        g = self.current_color[1]
-        r = self.current_color[2]
-
+        r, g, b = self.current_color
         count = 0
 
         while r != color[0] or g != color[1] or b != color[2]:
@@ -54,6 +51,8 @@ class LedStrip:
                 for i in range(self.controller.numPixels()):
                     self.controller.setPixelColor(i, c)
                     self.controller.show()
+        
+        self.current_color = color
 
 
 if __name__ == '__main__':
