@@ -35,10 +35,13 @@ def handle_emotion(emotion):
     global training_emotion
 
     if state == "TRAINING":
+        log.debug('Handle emotion in trainingmode')
         if emotion == training_emotion:
+            log.debug('Guessed correctly')
             command = Command.create(CommandType.set_color, colors.get('green')).serialize()
         else:
             training_timer.cancel()
+            log.debug('Guessed not correctly, canceled timer.')
             command = Command.create(CommandType.set_color, colors.get('red')).serialize()
 
     elif state == "CONVERSATION":
@@ -48,16 +51,20 @@ def handle_emotion(emotion):
 
 
 def training_cycle():
+    log.debug('Entering training cycle.')
     global training_timer
     global training_emotion
 
     detector.stop()
+    log.debug('Stopped detector.')
 
     training_emotion = random.choice(emotions)
+    log.debug('Random choice: ' + str(training_emotion))
 
     ledstrip_client.send(Command.create(CommandType.set_color, str(training_emotion.color)).serialize())
     training_timer = Timer(20, timeout)
 
+    log.debug('Starting detector.')
     detector.start()
 
 
