@@ -73,6 +73,6 @@ def main():
 
 
 if __name__ == "__main__":
-    is_test = True
+    is_test = False
 
     main()

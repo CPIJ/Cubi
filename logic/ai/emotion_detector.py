@@ -52,7 +52,7 @@ class EmotionDetector():
         self.is_running = False
 
     def start(self):
-        video_capture = cv2.VideoCapture(0)
+        video_capture = cv2.VideoCapture(1)
         self.is_running = True
 
         while self.is_running:
