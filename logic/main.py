@@ -1,4 +1,3 @@
-import utillities.socket_protocol as socket_protocol
 import argparse
 
 from utillities.logger import Logger

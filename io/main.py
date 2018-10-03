@@ -3,8 +3,7 @@ import random
 import os
 import socket
 import time
-#from ledstrip import *
-from emotion_detector import EmotionDetector
+
 from statistics import mode
 from signal import pause
 from statistics import mode, StatisticsError
@@ -16,9 +15,7 @@ from gpiozero import LED
 from gpiozero.pins.pigpio import PiGPIOFactory
 from aiy.pins import PIN_A
 
-emotion_cache = []
-min_cache_size = 3
-previous_emotion = ''
+
 button = Button(BUTTON_GPIO_PIN, hold_time=5)
 system_state = 'test'
 button_pressed_count = 0
@@ -63,31 +60,6 @@ def set_led_color(emotion_color):
 				lifecycle.ledstrip.transition_to_string("black")
 				time.sleep(1)
 			#fout dus zoeken laten zien?
-
-def handle_emotion(emotion):
-	global previous_emotion
-	emotion_cache.append(emotion)
-
-	if len(emotion_cache) < min_cache_size:
-		# Wait until enough emotions are stored.
-		return
-
-	try:
-		most_common_emotion = mode(emotion_cache)
-	except StatisticsError:
-		# If there are two or more emotions that are equally present
-		# add another emotion to the cache to try get a majority.
-		return
-
-	emotion_cache.clear()
-
-	if previous_emotion is most_common_emotion.name:
-		# Emotion did not change, don't change the LED.
-		return
-	print(most_common_emotion.name)
-	set_led_color(most_common_emotion.color)
-	#previous_emotion.name = most_common_emotion.name
-	previous_emotion = most_common_emotion.name
 
 def timeout():
 	global Learningmode_started
@@ -177,11 +149,6 @@ def on_button_released():
 		Learningmode_started = False
 		button_pressed_count = 0
 		on_button_released()
-
-def start_emotion_detection():
-    detector.on_emotion_detected(handle_emotion)
-    detector_thread = Thread(target=detector.start)
-    detector_thread.start()
             
 def main():
 	
@@ -199,23 +166,12 @@ if __name__ == '__main__':
 	system_state = "PowerOn"
 	lifecycle.ledstrip.transition_to_string("blue")
 	
-	detector = EmotionDetector(
-        detection_model_path="resources/face-detector.xml",
-        emotion_model_path="resources/emotion-classifier.hdf5",
-        image_offset=(20, 40))
-        
-	detector.on_emotion_detected(handle_emotion)
 	UI_thread = Thread(target=UI)
 	UI_thread.start()
-	#UI_thread.join()
 	
 	lifecycle.startup()
-	detector.stop()
-	detector.run()
-	#detector.stop()
-	#button.when_pressed = on_button_pressed
-	#button.when_released = on_button_released
-	#button.when_held = lifecycle.power_off
+	button.when_pressed = on_button_pressed
+	button.when_released = on_button_released
+	button.when_held = lifecycle.power_off
 	
-	#UI_thread.join()
 	pause()
