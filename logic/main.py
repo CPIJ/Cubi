@@ -19,7 +19,7 @@ def handle_emotion(emotion):
     ledstrip_client.send(serialized)
 
 
-def handle_socket_message(message):
+def handle_socket_message(message, sender):
     global detector
 
     command = socket_protocol.parse_command(message)

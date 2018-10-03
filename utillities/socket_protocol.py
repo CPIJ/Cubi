@@ -14,9 +14,10 @@ def serialize_command(command):
 
 def parse_command(message):
     parts = message.split(':')
-    assert len(parts) == 2
-
-    return Command(parts[0], parts[1])
+    if len(parts == 2):
+        return Command(parts[0], parts[1])
+    else:
+        return Command(parts[0], '')
 
 
 def create_command(command_type, parameter):
