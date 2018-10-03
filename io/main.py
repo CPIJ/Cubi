@@ -1,5 +1,4 @@
 import lifecycle
-import random
 import os
 import socket
 import time
@@ -9,15 +8,13 @@ from signal import pause
 from statistics import mode, StatisticsError
 from aiy.pins import BUTTON_GPIO_PIN
 from threading import Thread
-from threading import Timer
+
 from gpiozero import Button
 from gpiozero import LED
-from gpiozero.pins.pigpio import PiGPIOFactory
-from aiy.pins import PIN_A
 
 
 button = Button(BUTTON_GPIO_PIN, hold_time=5)
-system_state = 'test'
+system_state = ''
 button_pressed_count = 0
 detector = None
 random_chosen_color = None
@@ -108,11 +105,6 @@ def start_learning_mode(system_state):
 
 def on_button_released():
 	global button_pressed_count
-	global correct_gues
-	global timer_ended
-	global Learningmode_started
-	global timer
-	global learning_mode_thread
 	global system_state
 	
 	button_pressed_count += 1
@@ -120,18 +112,13 @@ def on_button_released():
 		system_state = "ConversationMode"
 		print("---------Conversation mode started--------")
 		lifecycle.ConversationMode()
-		if detector.stopped == True:
-			detector.Continue()
+		#stuur naar Logic conversationmode
 
 	if button_pressed_count == 2:		
 		system_state = "LearningMode"
 		print("---------Learning mode started--------")
 		lifecycle.LearningMode()
-
-		if system_state == "LearningMode":  
-			if Learningmode_started == False:
-				learning_mode_thread = Thread(target=start_learning_mode(system_state))
-				learning_mode_thread.start()
+		#stuur naar Logic learningmode
 				
 	if button_pressed_count == 3:
 		timer.cancel()
@@ -140,7 +127,6 @@ def on_button_released():
 		on_button_released()
             
 def main():
-	
 	while pause():
 		if system_state == "test":
 			pass
