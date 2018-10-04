@@ -13,8 +13,8 @@ class LedStrip:
         self.controller = ws.PixelStrip(
             lc.LED_COUNT, lc.LED_PIN, lc.LED_FREQ_HZ, lc.LED_DMA, lc.LED_INVERT, lc.LED_BRIGHTNESS, lc.LED_CHANNEL)
         self.is_on = False
-        self.current_color = (1, 1, 1)
-        self.transition_to((0, 0, 0), 100)
+        self.current_color = (0, 0, 0)
+        self.set_color(self.current_color)
 
     def start(self):
         assert not self.is_on
@@ -27,6 +27,14 @@ class LedStrip:
 
         self.transition_to((0, 0, 0), 0)
         self.is_on = False
+
+    def set_color(self, color):
+        c = colors.convert(color)
+        self.current_color = color
+
+        for i in range(self.controller.numPixels()):
+            self.controller.setPixelColor(i, c)
+            self.controller.show()
 
     def transition_to(self, color, ms):
         r, g, b = self.current_color
