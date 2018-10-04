@@ -50,7 +50,7 @@ class LedStrip:
 
             if g < color[1]:
                 g += 1
-            elif b > color[1]:
+            elif g > color[1]:
                 g -= 1
 
             if b < color[2]:
