@@ -22,6 +22,7 @@ training_timer = None
 log = Logger(__name__)
 is_guessing = False
 
+
 def close():
     set_to_black_cmd = Command.create(
         CommandType.set_color, '(0, 0, 0)').serialize()
@@ -38,16 +39,18 @@ def handle_emotion(emotion):
     global state
     global is_guessing
 
-    if state == "TRAINING":        
+    if state == "TRAINING":
         if emotion == training_emotion:
             log.debug('Guessed correctly')
-            command = Command.create(CommandType.set_color, colors.get('green')).serialize()
+            command = Command.create(
+                CommandType.set_color, colors.get('green')).serialize()
             ledstrip_client.send(command)
 
         else:
             training_timer.cancel()
             log.debug('Guessed not correctly, canceled timer.')
-            command = Command.create(CommandType.set_color, colors.get('red')).serialize()
+            command = Command.create(
+                CommandType.set_color, colors.get('red')).serialize()
             ledstrip_client.send(command)
             training_cycle()
 
@@ -62,7 +65,8 @@ def handle_emotion(emotion):
 
 def timeout():
     detector.stop()
-    command = Command.create(CommandType.set_color,str((255, 0, 0))).serialize()
+    command = Command.create(CommandType.set_color,
+                             str((255, 0, 0))).serialize()
     ledstrip_client.send(command)
     sleep(3)
     training_cycle()
@@ -72,9 +76,11 @@ def knipper(color):
     global ledstrip_client
 
     for i in range(5):
+        log.info('Knipper')
         ledstrip_client.send(Command.create(CommandType.set_color, str(color)).serialize())
         sleep(1)
-        ledstrip_client.send(Command.create(CommandType.set_color, str((0,0,0))).serialize())
+        ledstrip_client.send(Command.create(CommandType.set_color, str((0, 0, 0))).serialize())
+
 
 def training_cycle():
     log.debug('Entering training cycle.')
@@ -86,12 +92,16 @@ def training_cycle():
     log.debug('Stopped detector.')
 
     training_emotion = random.choice(emotions)
-    log.debug('Random choice: ' + str(training_emotion))
+    log.debug('Random choice: ' + str(training_emotion.name))
 
-    ledstrip_client.send(Command.create(CommandType.set_color, str(training_emotion.color)).serialize())
+    command = Command.create(CommandType.set_color, str(
+        training_emotion.color)).serialize()
+    log.info('Sending command: ' + command)
+    ledstrip_client.send(command)
+
     training_timer = Timer(20, timeout)
 
-    knipper(training_emotion)
+    knipper(training_emotion.color)
 
     log.debug('Starting detector.')
     detector.start()
