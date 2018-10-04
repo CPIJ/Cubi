@@ -2,7 +2,9 @@ import rpi_ws281x as ws
 import utillities.colors as colors
 import config.ledstrip_config as lc
 from time import sleep
+from utillities.logger import Logger
 
+log = Logger(__name__)
 
 class LedStrip:
 
@@ -28,6 +30,8 @@ class LedStrip:
         r, g, b = self.current_color
         count = 0
 
+        print(str(r) + str(b) + str(g))
+
         while r != color[0] or g != color[1] or b != color[2]:
             if r < color[0]:
                 r += 1
@@ -50,9 +54,12 @@ class LedStrip:
                 c = colors.convert((r, g, b))
 
                 for i in range(self.controller.numPixels()):
-                    self.controller.setPixelColor(i, c)
-                    self.controller.show()
-                    
+                    try:
+                        self.controller.setPixelColor(i, c)
+                        self.controller.show()
+                    except:
+                        log.error('Faulty color: ' + str(c))
+
             if count % 1000 == 0:
                 break
 
