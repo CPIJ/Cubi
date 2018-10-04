@@ -1,6 +1,9 @@
 import socket
 import asyncio
 from threading import Thread
+from utillities.logger import Logger
+
+log = Logger(__name__)
 
 
 class SocketServer():
@@ -19,11 +22,10 @@ class SocketServer():
         self.callbacks.append(callback)
 
     def start(self):
-        print('Starting server on port ' + str(self.port))
         self.is_running = True
-
         self.thread = Thread(target=self._start)
         self.thread.start()
+        log.info('Server started on port ' + str(self.port))
 
     def close(self):
         self.is_running = False
@@ -38,12 +40,24 @@ class SocketServer():
         for callback in self.callbacks:
             callback(message, self.name)
 
-    def _start(self):
-        print('Waiting for client to connect...')
-        client, address = self.server.accept()
-        print('new client connected: ' + str(client) + ', ' + str(address))
-
-        while self.is_running:
+    def _on_new_client(self, client, address):
+        log.info('New client connected: ' + str(address))
+        while True:
             message = client.recv(1024).decode()
+
+            if not message:
+                log.info('Client ' + str(address) + ' disconnected')
+                break
+
             self._on_message(message)
-        
+
+        client.close()
+
+    def _start(self):
+        while self.is_running:
+            try:
+                client, address = self.server.accept()
+                Thread(target=self._on_new_client, args=(client, address)).start()
+            except:
+                log.info('Server shutting down.')
+                break
