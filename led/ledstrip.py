@@ -6,6 +6,7 @@ from utillities.logger import Logger
 
 log = Logger(__name__)
 
+
 class LedStrip:
 
     def __init__(self):
@@ -13,6 +14,7 @@ class LedStrip:
             lc.LED_COUNT, lc.LED_PIN, lc.LED_FREQ_HZ, lc.LED_DMA, lc.LED_INVERT, lc.LED_BRIGHTNESS, lc.LED_CHANNEL)
         self.is_on = False
         self.current_color = (0, 0, 0)
+        self.transition_to((0, 0, 0), 100)
 
     def start(self):
         assert not self.is_on
