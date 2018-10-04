@@ -44,7 +44,7 @@ def on_message(message, sender):
 		if command_succesful:
 			logic_client.send(command.serialize())
 		else:
-			print('Failed to send ' + command.serialize() + ', Cubi in standby: ' + str(system_online))
+			print('Failed to send ' + command.serialize() + ', Cubi in standby: ' + str(not system_online))
 			
 	else:
 		log.error('Unkown command')
@@ -107,7 +107,7 @@ def main():
 	init_button()
 	init_server()
 	init_logic_client()
-	
+		
 	pause()
 
 if __name__ == '__main__':
