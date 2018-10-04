@@ -3,6 +3,10 @@ from signal import pause
 from aiy.pins import BUTTON_GPIO_PIN
 from gpiozero import Button
 from utillities.logger import Logger
+from config.socket_config import get_server_config
+from utillities.socket_protocol import Command
+from utillities.classes.socket_server import SocketServer
+from utillities.classes.socket_client import SocketClient
 
 button = Button(BUTTON_GPIO_PIN, hold_time=2)
 system_state = ''
@@ -10,6 +14,29 @@ button_pressed_count = 0
 system_online = False
 log = Logger(__name__)
 
+def on_message(message, sender):
+	global button_pressed_count
+	
+	command = Command.parse(message)
+	
+	if command.action == "SET_MODE":
+		if command.parameter == "CONVERSATION":
+			log.info("Switch to conversation mode.")
+			lifecycle.ConversationMode()
+			button_pressed_count = 2
+			
+		elif command.parameter == "TRAINING":	
+			log.info("Switch to training mode.")
+			lifecycle.LearningMode()
+			button_pressed_count = 1
+			
+		elif command.parameter == "STANDBY":
+			on_button_held()
+			
+		else:
+			log.error('Invalid parameter: ' + command.parameter)
+	else:
+		log.error('Unkown command')
 
 def on_button_held():
 	global system_online
@@ -42,12 +69,26 @@ def on_button_released():
 		log.info("Switch to training mode.")
 		lifecycle.LearningMode()
 		button_pressed_count = 1
+		
 
-            							
+def init_server():
+	server_config = get_server_config('IO_SERVER')
+	server = SocketServer(server_config.port, 'IO_SERVER')
+	server.message_received(on_message)
+	server.start()
 
-if __name__ == '__main__':
+			
+def init_button():
 	button.when_released = on_button_released
 	button.when_held = on_button_held
 	log.info('Buttons ready.')
+
+
+def main():
+	init_button()
+	init_server()
 	
 	pause()
+
+if __name__ == '__main__':
+	main()
