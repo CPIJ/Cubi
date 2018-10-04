@@ -40,7 +40,7 @@ class LedStrip:
         r, g, b = self.current_color
         count = 0
 
-        print(str(r) + ' ' + str(b) + ' '  + str(g))
+        log.info('Transition to: ' + str(r) + ' ' + str(g) + ' '  + str(b))
 
         while r != color[0] or g != color[1] or b != color[2]:
             if r < color[0]:
@@ -68,7 +68,7 @@ class LedStrip:
                         self.controller.setPixelColor(i, c)
                         self.controller.show()
                     except:
-                        log.error('Faulty color: ' + str(c))
+                        log.error('Faulty color: ' + str(c) + '  ' + str(r) + ' ' + str(g) + ' '  + str(b))
 
             if count % 1000 == 0:
                 break
