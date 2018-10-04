@@ -13,19 +13,23 @@ system_state = ''
 button_pressed_count = 0
 system_online = False
 log = Logger(__name__)
+logic_client = None
 
 def on_message(message, sender):
 	global button_pressed_count
+	global logic_client
+	global system_online
 	
+	command_succesful = True
 	command = Command.parse(message)
 	
-	if command.action == "SET_MODE":
-		if command.parameter == "CONVERSATION":
+	if command.action == "SET_MODE":	
+		if command.parameter == "CONVERSATION" and system_online:				
 			log.info("Switch to conversation mode.")
 			lifecycle.ConversationMode()
 			button_pressed_count = 2
 			
-		elif command.parameter == "TRAINING":	
+		elif command.parameter == "TRAINING" and system_online:	
 			log.info("Switch to training mode.")
 			lifecycle.LearningMode()
 			button_pressed_count = 1
@@ -34,9 +38,17 @@ def on_message(message, sender):
 			on_button_held()
 			
 		else:
+			command_succesful = False
 			log.error('Invalid parameter: ' + command.parameter)
+		
+		if command_succesful:
+			logic_client.send(command.serialize())
+		else:
+			print('Failed to send ' + command.serialize() + ', Cubi in standby: ' + str(system_online))
+			
 	else:
 		log.error('Unkown command')
+
 
 def on_button_held():
 	global system_online
@@ -84,9 +96,17 @@ def init_button():
 	log.info('Buttons ready.')
 
 
+def init_logic_client():
+	global logic_client
+	
+	server_config = get_server_config('LOGIC_SERVER', is_test=True)
+	logic_client = SocketClient(server_config.host, server_config.port)
+	
+
 def main():
 	init_button()
 	init_server()
+	init_logic_client()
 	
 	pause()
 
