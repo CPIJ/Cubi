@@ -1,19 +1,16 @@
 import time
-import colors
+import utillities.colors as colors
 import os
 import aiy.toneplayer
 
-from ledstrip import *
 from aiy.leds import Leds
-from music import poweroff_theme, poweron_theme
+from utillities.music import poweroff_theme, poweron_theme
 
 leds = Leds()
-ledstrip = LedStrip()
-ledstrip.start()
-		
+
+
 def startup():
 	print("---------starting up--------")
-	ledstrip.transition_to_string("white")
 	leds.update(Leds.rgb_on(colors.get('blue')))
 	time.sleep(0.5)
 	leds.update(Leds.rgb_on(colors.get('yellow')))
@@ -31,7 +28,6 @@ def startup():
 
 	leds.update(Leds.privacy_on())
 
-	ledstrip.transition_to_string("blue")
 	
 	
 def ConversationMode():

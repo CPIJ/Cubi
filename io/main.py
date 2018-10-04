@@ -1,4 +1,4 @@
-import lifecycle
+import utillities.lifecycle as lifecycle
 import os
 import socket
 import time
@@ -46,20 +46,17 @@ def main():
 			pass
 			
 def UI():
-	button.when_pressed = on_button_pressed
 	button.when_released = on_button_released
 	button.when_held = lifecycle.power_off
 				
 
 if __name__ == '__main__':
 	system_state = "PowerOn"
-	lifecycle.ledstrip.transition_to_string("blue")
 	
-	UI_thread = Thread(target=UI)
-	UI_thread.start()
+	#UI_thread = Thread(target=UI)
+	#UI_thread.start()
 	
 	lifecycle.startup()
-	button.when_pressed = on_button_pressed
 	button.when_released = on_button_released
 	button.when_held = lifecycle.power_off
 	
