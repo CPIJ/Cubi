@@ -20,7 +20,7 @@ state = ''
 training_emotion = None
 training_timer = None
 log = Logger(__name__)
-
+is_guessing = False
 
 def close():
     set_to_black_cmd = Command.create(
@@ -36,8 +36,9 @@ def handle_emotion(emotion):
     global training_emotion
     global ledstrip_client
     global state
+    global is_guessing
 
-    if state == "TRAINING":
+    if state == "TRAINING":        
         if emotion == training_emotion:
             log.debug('Guessed correctly')
             command = Command.create(CommandType.set_color, colors.get('green')).serialize()
@@ -48,6 +49,7 @@ def handle_emotion(emotion):
             log.debug('Guessed not correctly, canceled timer.')
             command = Command.create(CommandType.set_color, colors.get('red')).serialize()
             ledstrip_client.send(command)
+            training_cycle()
 
     elif state == "CONVERSATION":
         command = Command.create(
@@ -66,10 +68,19 @@ def timeout():
     training_cycle()
 
 
+def knipper(color):
+    global ledstrip_client
+
+    for i in range(5):
+        ledstrip_client.send(Command.create(CommandType.set_color, str(color)).serialize())
+        sleep(1)
+        ledstrip_client.send(Command.create(CommandType.set_color, str((0,0,0))).serialize())
+
 def training_cycle():
     log.debug('Entering training cycle.')
     global training_timer
     global training_emotion
+    global is_guessing
 
     detector.stop()
     log.debug('Stopped detector.')
@@ -79,6 +90,8 @@ def training_cycle():
 
     ledstrip_client.send(Command.create(CommandType.set_color, str(training_emotion.color)).serialize())
     training_timer = Timer(20, timeout)
+
+    knipper(training_emotion)
 
     log.debug('Starting detector.')
     detector.start()
