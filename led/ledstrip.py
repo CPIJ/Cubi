@@ -12,13 +12,14 @@ class LedStrip:
     def __init__(self):
         self.controller = ws.PixelStrip(lc.LED_COUNT, lc.LED_PIN, lc.LED_FREQ_HZ, lc.LED_DMA, lc.LED_INVERT, lc.LED_BRIGHTNESS, lc.LED_CHANNEL)
         self.is_on = False
+        self.controller.begin()
         self.current_color = (255, 255, 255)
-        self.transition_to((0, 0, 0), 100)
+        self.transition_to((0,0,0), 100)
 
     def start(self):
         assert not self.is_on
+        
 
-        self.controller.begin()
         self.is_on = True
 
     def stop(self):
