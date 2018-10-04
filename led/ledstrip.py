@@ -40,7 +40,7 @@ class LedStrip:
         r, g, b = self.current_color
         count = 0
 
-        print(str(r) + str(b) + str(g))
+        print(str(r) + ' ' + str(b) + ' '  + str(g))
 
         while r != color[0] or g != color[1] or b != color[2]:
             if r < color[0]:

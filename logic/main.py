@@ -74,18 +74,15 @@ def timeout():
 def knipper(color):
     global ledstrip_client
 
-    delay = 5
-
-    for i in range(8):
-        delay /= 2
-        log.info('Blink for ' + str(delay) + ' seconds.')
+    for i in range(3):
+        log.info('Blink for 2 seconds.')
 
         command = Command.create(CommandType.set_color, str(color))
         ledstrip_client.send(command.serialize())
 
-        sleep(delay)
+        sleep(2)
         
-        command = Command.create(CommandType.set_color, '(0, 0, 0)')
+        command = Command.create(CommandType.set_color, str((0, 0, 0)))
         ledstrip_client.send(command.serialize())
 
 
@@ -102,7 +99,6 @@ def training_cycle():
     log.debug('Random choice: ' + str(training_emotion.name))
 
     command = Command.create(CommandType.set_color, str(training_emotion.color)).serialize()
-    log.info('Sending command: ' + command)
     ledstrip_client.send(command)
 
     training_timer = Timer(20, timeout)
