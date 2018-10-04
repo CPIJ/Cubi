@@ -24,8 +24,7 @@ is_guessing = False
 
 
 def close():
-    set_to_black_cmd = Command.create(
-        CommandType.set_color, '(0, 0, 0)').serialize()
+    set_to_black_cmd = Command.create(CommandType.set_color, '(0, 0, 0)').serialize()
     exit_cmd = Command.create(CommandType.exit).serialize()
 
     ledstrip_client.send(set_to_black_cmd)
@@ -42,8 +41,7 @@ def handle_emotion(emotion):
     if state == "TRAINING":
         if emotion == training_emotion:
             log.debug('Guessed correctly')
-            command = Command.create(
-                CommandType.set_color, colors.get('green')).serialize()
+            command = Command.create(CommandType.set_color, colors.get('green')).serialize()
             ledstrip_client.send(command)
 
         else:
@@ -174,12 +172,9 @@ def init_detector():
 
 def main():
     start_ledstrip_client()
-
-    ledstrip_client.send(Command.create(
-        CommandType.set_color, '(0,0,0)').serialize())
-
     start_server()
     init_detector()
+
 
 
 if __name__ == "__main__":

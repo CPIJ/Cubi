@@ -12,6 +12,10 @@ log = Logger(__name__)
 def handle_message(message, sender):
     command = Command.parse(message)
 
+    if not command.parameter:
+        log.error('Empty parameter for command: ' + command.serialize())
+        return
+        
     if command.action == "SET_COLOR":
         color = eval(command.parameter)
         strip.transition_to(color, 100)

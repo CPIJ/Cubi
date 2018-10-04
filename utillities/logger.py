@@ -12,4 +12,4 @@ class Logger():
         self.log('ERROR: ' + message)
 
     def log(self, message):
-        print('("' + self.filename + '")' + ' ' + message)
+        print(message)
