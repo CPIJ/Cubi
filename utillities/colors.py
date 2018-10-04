@@ -21,3 +21,10 @@ def get(name):
 
 def convert(color):
     return Color(color[0], color[1], color[2])
+
+def convert_to_rgb(number):
+    b = number & 0xFF
+    g = (number >> 8) & 0xFF 
+    r = (number >> 16) & 0xFF
+
+    return (r, g, b)
