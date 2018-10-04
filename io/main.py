@@ -1,63 +1,53 @@
 import utillities.lifecycle as lifecycle
-import os
-import socket
-import time
-
-from statistics import mode
 from signal import pause
-from statistics import mode, StatisticsError
 from aiy.pins import BUTTON_GPIO_PIN
-from threading import Thread
 from gpiozero import Button
-from gpiozero import LED
+from utillities.logger import Logger
 
-
-button = Button(BUTTON_GPIO_PIN, hold_time=5)
+button = Button(BUTTON_GPIO_PIN, hold_time=2)
 system_state = ''
 button_pressed_count = 0
+system_online = False
+log = Logger(__name__)
+
+
+def on_button_held():
+	global system_online
+	global button_pressed_count
+	
+	system_online = not system_online
+		
+	if not system_online:
+		lifecycle.power_off()
+		button_pressed_count = 0
+	else:
+		lifecycle.startup()
 
 
 def on_button_released():
 	global button_pressed_count
 	global system_state
 	
+	if not system_online:
+		return
+	
 	button_pressed_count += 1
-	if button_pressed_count == 1:
-		system_state = "ConversationMode"
-		print("---------Conversation mode started--------")
+	
+	if button_pressed_count == 2:
+		log.info("Switch to conversation mode.")
 		lifecycle.ConversationMode()
-		#stuur naar Logic conversationmode
 
-	if button_pressed_count == 2:		
-		system_state = "LearningMode"
-		print("---------Learning mode started--------")
+
+	if button_pressed_count == 3:		
+		log.info("Switch to training mode.")
 		lifecycle.LearningMode()
-		#stuur naar Logic learningmode
-				
-	if button_pressed_count == 3:
-		timer.cancel()
-		Learningmode_started = False
-		button_pressed_count = 0
-		on_button_released()
-            
-def main():
-	while pause():
-		if system_state == "test":
-			pass
-			
-def UI():
-	button.when_released = on_button_released
-	button.when_held = lifecycle.power_off
-				
+		button_pressed_count = 1
+
+            							
 
 if __name__ == '__main__':
-	system_state = "PowerOn"
-	
-	#UI_thread = Thread(target=UI)
-	#UI_thread.start()
-	
-	lifecycle.startup()
 	button.when_released = on_button_released
-	button.when_held = lifecycle.power_off
+	button.when_held = on_button_held
+	log.info('Buttons ready.')
 	
 	pause()
