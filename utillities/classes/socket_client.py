@@ -1,4 +1,8 @@
 import socket
+from utillities.logger import Logger
+
+log = Logger(__name__)
+
 
 class SocketClient():
     def __init__(self, host, port):
@@ -6,6 +10,7 @@ class SocketClient():
         self.client.connect((host, port))
 
     def send(self, message):
+        log.info('Sending message: ' + message)
         self.client.send(message.encode())
 
     def close(self):
