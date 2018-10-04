@@ -10,10 +10,8 @@ log = Logger(__name__)
 class LedStrip:
 
     def __init__(self):
-        self.controller = ws.PixelStrip(
-            lc.LED_COUNT, lc.LED_PIN, lc.LED_FREQ_HZ, lc.LED_DMA, lc.LED_INVERT, lc.LED_BRIGHTNESS, lc.LED_CHANNEL)
+        self.controller = ws.PixelStrip(lc.LED_COUNT, lc.LED_PIN, lc.LED_FREQ_HZ, lc.LED_DMA, lc.LED_INVERT, lc.LED_BRIGHTNESS, lc.LED_CHANNEL)
         self.is_on = False
-        self.current_color = colors.convert_to_rgb(self.controller.getPixelColor(0))
         self.transition_to((0, 0, 0), 100)
 
     def start(self):
