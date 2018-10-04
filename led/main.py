@@ -22,7 +22,7 @@ def handle_message(message, sender):
 
     elif command.action == "EXIT":
         strip.transition_to(colors.get("black"), 100)
-        server.restart()
+        server.close()
 
     else:
         log.error('Unown command: ' + command.parameter)

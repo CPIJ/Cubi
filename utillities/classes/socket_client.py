@@ -10,7 +10,6 @@ class SocketClient():
         self.client.connect((host, port))
 
     def send(self, message):
-        log.info('Sending message: ' + message)
         self.client.send(message.encode())
 
     def close(self):

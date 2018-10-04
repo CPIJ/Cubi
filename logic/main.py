@@ -41,12 +41,15 @@ def handle_emotion(emotion):
     if state == "TRAINING":
         if emotion == training_emotion:
             log.debug('Guessed correctly')
+            training_timer.cancel()
+            detector.stop()
             command = Command.create(CommandType.set_color, colors.get('green')).serialize()
             ledstrip_client.send(command)
 
         else:
-            training_timer.cancel()
             log.debug('Guessed not correctly, canceled timer.')
+            training_timer.cancel()
+            detector.stop()
             command = Command.create(CommandType.set_color, colors.get('red')).serialize()
             ledstrip_client.send(command)
             sleep(3)
@@ -78,10 +81,12 @@ def knipper(color):
         command = Command.create(CommandType.set_color, str(color))
         ledstrip_client.send(command.serialize())
 
-        sleep(2)
+        sleep(1)
         
         command = Command.create(CommandType.set_color, str((0, 0, 0)))
         ledstrip_client.send(command.serialize())
+        
+        sleep(1)
 
 
 def training_cycle():
