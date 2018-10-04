@@ -23,7 +23,8 @@ log = Logger(__name__)
 
 
 def close():
-    set_to_black_cmd = Command.create(CommandType.set_color, '(0, 0, 0)').serialize()
+    set_to_black_cmd = Command.create(
+        CommandType.set_color, '(0, 0, 0)').serialize()
     exit_cmd = Command.create(CommandType.exit).serialize()
 
     ledstrip_client.send(set_to_black_cmd)
@@ -33,24 +34,36 @@ def close():
 def handle_emotion(emotion):
     global training_timer
     global training_emotion
+    global ledstrip_client
     global state
 
     if state == "TRAINING":
         if emotion == training_emotion:
             log.debug('Guessed correctly')
             command = Command.create(CommandType.set_color, colors.get('green')).serialize()
+            ledstrip_client.send(command)
+
         else:
             training_timer.cancel()
             log.debug('Guessed not correctly, canceled timer.')
             command = Command.create(CommandType.set_color, colors.get('red')).serialize()
+            ledstrip_client.send(command)
 
     elif state == "CONVERSATION":
-        command = Command.create(CommandType.set_color, str(emotion.color)).serialize()
+        command = Command.create(
+            CommandType.set_color, str(emotion.color)).serialize()
         ledstrip_client.send(command)
-    
+
     else:
         log.error('Unkown state, cannot handle emotion')
-    
+
+
+def timeout():
+    detector.stop()
+    command = Command.create(CommandType.set_color,str((255, 0, 0))).serialize()
+    ledstrip_client.send(command)
+    sleep(3)
+    training_cycle()
 
 
 def training_cycle():
@@ -69,15 +82,6 @@ def training_cycle():
 
     log.debug('Starting detector.')
     detector.start()
-
-
-
-def timeout():
-    detector.stop()
-    command = Command.create(CommandType.set_color,str((255, 0, 0))).serialize()
-    ledstrip_client.send(command)
-    sleep(3)
-    training_cycle()
 
 
 def handle_socket_message(message, sender):
@@ -146,7 +150,8 @@ def init_detector():
 def main():
     start_ledstrip_client()
 
-    ledstrip_client.send(Command.create(CommandType.set_color, '(0,0,0)').serialize())
+    ledstrip_client.send(Command.create(
+        CommandType.set_color, '(0,0,0)').serialize())
 
     start_server()
     init_detector()
