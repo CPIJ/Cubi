@@ -39,15 +39,14 @@ def on_message(message, sender):
 			
 		else:
 			command_succesful = False
-			log.error('Invalid parameter: ' + command.parameter)			
-	else:
-		log.error('Unkown command')
-	
-	if command_succesful and command.action == "SET_MODE":
+			log.error('Invalid parameter: ' + command.parameter)	
+
 		log.debug('Command succesful, passing to LOGIC_SERVER.')
 		logic_client.send(command.serialize())	
+				
 	else:
-		print('Failed to send ' + command.serialize() + ', Cubi in standby: ' + str(not system_online))
+		log.error('Unkown command')
+
 
 
 def on_button_held():
