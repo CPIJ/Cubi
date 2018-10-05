@@ -25,23 +25,25 @@ def on_message(message, sender):
 	
 	if command.action == "SET_MODE":	
 		if command.parameter == "CONVERSATION" and system_online:				
+			log.info('Command succesful, passing to LOGIC_SERVER.')
+			logic_client.send(command.serialize())	
 			log.info("Switch to conversation mode.")
 			lifecycle.ConversationMode()
 			button_pressed_count = 2
-			log.info('Command succesful, passing to LOGIC_SERVER.')
-			logic_client.send(command.serialize())	
+
 			
 		elif command.parameter == "TRAINING" and system_online:	
+			log.info('Command succesful, passing to LOGIC_SERVER.')
+			logic_client.send(command.serialize())	
 			log.info("Switch to training mode.")
 			lifecycle.LearningMode()
 			button_pressed_count = 1
-			log.info('Command succesful, passing to LOGIC_SERVER.')
-			logic_client.send(command.serialize())	
+
 			
 		elif command.parameter == "STANDBY":
-			on_button_held()
 			log.info('Command succesful, passing to LOGIC_SERVER.')
 			logic_client.send(command.serialize())	
+			on_button_held()
 			
 		else:
 			command_succesful = False
