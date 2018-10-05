@@ -4,7 +4,7 @@ from keras.models import load_model
 from ai.helpers import *
 from statistics import mode, StatisticsError
 from threading import Thread
-from utillities.models.emotion import basic_emotions
+from utillities.models.emotion import get_level
 from utillities.logger import Logger
 
 log = Logger(__name__)
@@ -22,6 +22,7 @@ class EmotionDetector():
         self.min_cache_size = 10
         self.previous_emotion = ''
         self.is_running = False
+        self.level = 1
 
     def on_emotion_detected(self, callback):
         self.subscribers.append(callback)
@@ -62,7 +63,7 @@ class EmotionDetector():
         self.is_running = True
 
     def init(self):
-        video_capture = cv2.VideoCapture(0)
+        video_capture = cv2.VideoCapture(1)
         has_frame, bgr_image = video_capture.read()
 
         while True:
@@ -95,7 +96,7 @@ class EmotionDetector():
             emotion_prediction = self.emotion_classifier.predict(gray_face)
 
             emotion_label_arg = np.argmax(emotion_prediction)
-            emotion = basic_emotions[emotion_label_arg]
+            emotion = get_level(self.level)[emotion_label_arg]
 
             self.emotion_detected(emotion)
 

@@ -8,7 +8,7 @@ from utillities.logger import Logger
 from utillities.socket_protocol import Command, CommandType
 from utillities.classes.socket_client import SocketClient
 from utillities.classes.socket_server import SocketServer
-from utillities.models.emotion import basic_emotions as emotions
+from utillities.models.emotion import get_level, toggle_emotion
 from ai.emotion_detector import EmotionDetector
 from config.socket_config import get_server_config
 
@@ -21,10 +21,12 @@ training_emotion = None
 training_timer = None
 log = Logger(__name__)
 is_standby = True
+level = 1
 
 
 def close():
-    set_to_black_cmd = Command.create(CommandType.set_color, '(0, 0, 0)').serialize()
+    set_to_black_cmd = Command.create(
+        CommandType.set_color, '(0, 0, 0)').serialize()
     exit_cmd = Command.create(CommandType.exit).serialize()
 
     ledstrip_client.send(set_to_black_cmd)
@@ -41,6 +43,7 @@ def handle_training_result(color):
     sleep(3)
 
     training_cycle()
+
 
 def handle_emotion(emotion):
     global training_timer
@@ -62,29 +65,38 @@ def handle_emotion(emotion):
             CommandType.set_color, str(emotion.color)).serialize()
         ledstrip_client.send(command)
 
+    elif state == "STANDBY":
+        if training_timer is not None:
+            training_timer.cancel()
+
     else:
         log.error('Unkown state, cannot handle emotion')
 
 
 def timeout():
     detector.stop()
-    command = Command.create(CommandType.set_color, str((255, 0, 0))).serialize()
+    command = Command.create(CommandType.set_color,
+                             str((255, 0, 0))).serialize()
     ledstrip_client.send(command)
     sleep(3)
     training_cycle()
 
 
-def knipper(color):
+def blink(color):
     global ledstrip_client
+    global state
 
     for i in range(3):
-        log.info('Blink for 2 seconds.')
+        if state != "TRAINING":
+            break
+
+        log.info('Blink ' + str(3 - i))
 
         command = Command.create(CommandType.set_color, str(color))
         ledstrip_client.send(command.serialize())
 
         sleep(1)
-        
+
         command = Command.create(CommandType.set_color, str((0, 0, 0)))
         ledstrip_client.send(command.serialize())
 
@@ -99,15 +111,16 @@ def training_cycle():
     detector.stop()
     log.debug('Stopped detector.')
 
-    training_emotion = random.choice(emotions)
+    training_emotion = random.choice(get_level(1))
     log.debug('Random choice: ' + str(training_emotion.name))
 
-    command = Command.create(CommandType.set_color, str(training_emotion.color)).serialize()
+    command = Command.create(CommandType.set_color, str(
+        training_emotion.color)).serialize()
     ledstrip_client.send(command)
 
     training_timer = Timer(20, timeout)
 
-    knipper(training_emotion.color)
+    blink(training_emotion.color)
 
     log.debug('Starting detector.')
     detector.start()
@@ -124,7 +137,14 @@ def handle_socket_message(message, sender):
 
     if command.action == "EXIT":
         close()
+    elif command.action == "SET_LEVEL":
+        log.debug('Change level: ' + command.parameter)
+        detector.level = int(command.parameter)
 
+    elif command.action == "TOGGLE_EMOTION":
+        log.debug('Toggle emotion: ' + command.parameter)
+        toggle_emotion(command.parameter.lower())
+        
     elif command.action == "SET_MODE":
         state = command.parameter
 
@@ -145,6 +165,8 @@ def handle_socket_message(message, sender):
                 ledstrip_client.send(command.serialize())
             else:
                 detector.start()
+                command = Command.create(CommandType.set_color, '(25,25,25)')
+                ledstrip_client.send(command.serialize())
 
         else:
             log.error('Unkown state: ' + state)
@@ -194,7 +216,6 @@ def main():
     start_ledstrip_client()
     start_server()
     init_detector()
-
 
 
 if __name__ == "__main__":
