@@ -20,6 +20,7 @@ state = ''
 training_emotion = None
 training_timer = None
 log = Logger(__name__)
+is_standby = True
 
 
 def close():
@@ -114,6 +115,8 @@ def training_cycle():
 
 def handle_socket_message(message, sender):
     global state
+    global is_standby
+    global ledstrip_client
 
     command = Command.parse(message)
 
@@ -132,6 +135,16 @@ def handle_socket_message(message, sender):
 
         elif state == "TRAINING":
             training_cycle()
+
+        elif state == "STANDBY":
+            is_standby = not is_standby
+
+            if is_standby:
+                detector.stop()
+                command = Command.create(CommandType.set_color, '(0,0,0)')
+                ledstrip_client.send(command.serialize())
+            else:
+                detector.start()
 
         else:
             log.error('Unkown state: ' + state)

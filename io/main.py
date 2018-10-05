@@ -60,6 +60,9 @@ def on_button_held():
 		button_pressed_count = 0
 	else:
 		lifecycle.startup()
+	
+	command = Command.create(CommandType.set_mode, 'STANDBY')
+	logic_client.send(command.serialize())
 
 
 def on_button_released():
