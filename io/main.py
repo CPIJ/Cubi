@@ -24,20 +24,25 @@ def on_message(message, sender):
 	command = Command.parse(message)
 	
 	if command.action == "SET_MODE":	
-		log.info('Command succesful, passing to LOGIC_SERVER.')
-		logic_client.send(command.serialize())	
-		
 		if command.parameter == "CONVERSATION" and system_online:				
+			log.info('Command succesful, passing to LOGIC_SERVER.')
+			logic_client.send(command.serialize())	
 			log.info("Switch to conversation mode.")
 			lifecycle.ConversationMode()
 			button_pressed_count = 2
+
 			
 		elif command.parameter == "TRAINING" and system_online:	
+			log.info('Command succesful, passing to LOGIC_SERVER.')
+			logic_client.send(command.serialize())	
 			log.info("Switch to training mode.")
 			lifecycle.LearningMode()
 			button_pressed_count = 1
+
 			
 		elif command.parameter == "STANDBY":
+			log.info('Command succesful, passing to LOGIC_SERVER.')
+			logic_client.send(command.serialize())	
 			on_button_held()
 			
 		else:
