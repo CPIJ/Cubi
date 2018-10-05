@@ -112,12 +112,11 @@ def training_cycle():
     detector.stop()
     log.debug('Stopped detector.')
 
-    training_emotion = random.choice(filter(lambda emotion: emotion.enabled, get_level(1)))
+    training_emotion = random.choice(list((filter(lambda emotion: emotion.enabled, [x[1] for x in get_level(1).items()]))))
     log.debug('Random choice: ' + str(training_emotion.name))
 
-    command = Command.create(CommandType.set_color, str(
-        training_emotion.color)).serialize()
-    ledstrip_client.send(command)
+    command = Command.create(CommandType.set_color, str(training_emotion.color))
+    ledstrip_client.send(command.serialize())
 
     training_timer = Timer(20, timeout)
 

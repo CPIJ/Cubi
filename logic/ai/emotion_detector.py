@@ -53,17 +53,17 @@ class EmotionDetector():
             callback(most_common_emotion)
 
     def stop(self):
-        log.debug('Set is running to false')
+        log.debug('Stopping emotion detector.')
         self.emotion_cache.clear()
         self.is_running = False
 
     def start(self):
-        log.debug('Set is running to true')
+        log.debug('Starting emotion detector.')
         self.emotion_cache.clear()
         self.is_running = True
 
     def init(self):
-        video_capture = cv2.VideoCapture(1)
+        video_capture = cv2.VideoCapture(0)
         has_frame, bgr_image = video_capture.read()
 
         while True:
