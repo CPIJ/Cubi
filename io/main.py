@@ -24,7 +24,7 @@ def on_message(message, sender):
 	command = Command.parse(message)
 	
 	if command.action == "SET_MODE":	
-		log.debug('Command succesful, passing to LOGIC_SERVER.')
+		log.info('Command succesful, passing to LOGIC_SERVER.')
 		logic_client.send(command.serialize())	
 		
 		if command.parameter == "CONVERSATION" and system_online:				
