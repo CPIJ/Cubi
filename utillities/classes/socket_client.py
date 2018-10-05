@@ -1,4 +1,8 @@
 import socket
+from utillities.logger import Logger
+
+log = Logger(__name__)
+
 
 class SocketClient():
     def __init__(self, host, port):

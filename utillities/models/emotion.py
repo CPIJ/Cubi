@@ -11,6 +11,6 @@ basic_emotions = {
     2: Emotion('fear', colors.get('green')),
     3: Emotion('happy', colors.get('yellow')),
     4: Emotion('sad', colors.get('blue')),
-    5: Emotion('surprise', colors.get('lightblue')),
+    5: Emotion('surprise', colors.get('cyan')),
     6: Emotion('neutral', colors.get('white')),
 }
