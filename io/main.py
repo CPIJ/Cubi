@@ -42,13 +42,8 @@ def on_message(message, sender):
 			log.error('Invalid parameter: ' + command.parameter)
 		
 		if command_succesful:
-<<<<<<< Updated upstream
 			logic_client.send(command.serialize())
 			
-=======
-			log.debug('aaaaa')
-			logic_client.send(command.serialize())
->>>>>>> Stashed changes
 		else:
 			print('Failed to send ' + command.serialize() + ', Cubi in standby: ' + str(not system_online))
 			
