@@ -4,7 +4,7 @@ from aiy.pins import BUTTON_GPIO_PIN
 from gpiozero import Button
 from utillities.logger import Logger
 from config.socket_config import get_server_config
-from utillities.socket_protocol import Command
+from utillities.socket_protocol import Command, CommandType
 from utillities.classes.socket_server import SocketServer
 from utillities.classes.socket_client import SocketClient
 
@@ -25,34 +25,29 @@ def on_message(message, sender):
 	
 	if command.action == "SET_MODE":	
 		if command.parameter == "CONVERSATION" and system_online:				
-			log.info('Command succesful, passing to LOGIC_SERVER.')
-			logic_client.send(command.serialize())	
 			log.info("Switch to conversation mode.")
 			lifecycle.ConversationMode()
 			button_pressed_count = 2
-
 			
 		elif command.parameter == "TRAINING" and system_online:	
-			log.info('Command succesful, passing to LOGIC_SERVER.')
-			logic_client.send(command.serialize())	
 			log.info("Switch to training mode.")
 			lifecycle.LearningMode()
 			button_pressed_count = 1
-
 			
 		elif command.parameter == "STANDBY":
-			log.info('Command succesful, passing to LOGIC_SERVER.')
-			logic_client.send(command.serialize())	
 			on_button_held()
 			
 		else:
 			command_succesful = False
-			log.error('Invalid parameter: ' + command.parameter)	
-
+			log.error('Invalid parameter: ' + command.parameter)
+		
+		if command_succesful:
+			logic_client.send(command.serialize())
+		else:
+			print('Failed to send ' + command.serialize() + ', Cubi in standby: ' + str(not system_online))
+			
 	else:
 		log.error('Unkown command')
-
-
 
 def on_button_held():
 	global system_online
@@ -79,12 +74,16 @@ def on_button_released():
 	if button_pressed_count == 2:
 		log.info("Switch to conversation mode.")
 		lifecycle.ConversationMode()
+		command = Command.create(CommandType.set_mode, 'CONVERSATION')
+		logic_client.send(command.serialize())
 
 
 	if button_pressed_count == 3:		
 		log.info("Switch to training mode.")
 		lifecycle.LearningMode()
 		button_pressed_count = 1
+		command = Command.create(CommandType.set_mode, 'TRAINING')
+		logic_client.send(command.serialize())
 		
 
 def init_server():
