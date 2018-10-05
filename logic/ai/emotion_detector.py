@@ -53,10 +53,12 @@ class EmotionDetector():
 
     def stop(self):
         log.debug('Set is running to false')
+        self.emotion_cache.clear()
         self.is_running = False
 
     def start(self):
         log.debug('Set is running to true')
+        self.emotion_cache.clear()
         self.is_running = True
 
     def init(self):
