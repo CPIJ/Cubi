@@ -40,7 +40,7 @@ class LedStrip:
         r, g, b = self.current_color
         count = 0
 
-        log.info('Transition to: ' + str(r) + ' ' + str(g) + ' '  + str(b))
+        log.info('Transition to: ' + str(color) + ', from ' + str(self.current_color))
 
         while r != color[0] or g != color[1] or b != color[2]:
             if r < color[0]:
