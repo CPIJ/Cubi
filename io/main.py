@@ -42,6 +42,7 @@ def on_message(message, sender):
 			log.error('Invalid parameter: ' + command.parameter)
 		
 		if command_succesful:
+			log.debug('Command succesful, passing to LOGIC_SERVER.')
 			logic_client.send(command.serialize())
 			
 		else:
