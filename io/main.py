@@ -99,7 +99,7 @@ def init_button():
 def init_logic_client():
 	global logic_client
 	
-	server_config = get_server_config('LOGIC_SERVER', is_test=True)
+	server_config = get_server_config('LOGIC_SERVER')
 	logic_client = SocketClient(server_config.host, server_config.port)
 	
 
