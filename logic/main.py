@@ -145,16 +145,22 @@ def start_server():
 
     server_config = get_server_config('LOGIC_SERVER', is_test)
 
+    log.debug('Starting LOGIC_SERVER at ' + str(server_config))
+
     socket_server = SocketServer(server_config.port, "LOGIC_SERVER")
     socket_server.message_received(handle_socket_message)
     socket_server.start()
+
+    log.debug('LOGIC_SERVER Started')
 
 
 def start_ledstrip_client():
     global ledstrip_client
 
     server_config = get_server_config('LED_SERVER', is_test)
+    log.debug('Connecting to LED_SERVER at ' + str(server_config))
     ledstrip_client = SocketClient(server_config.host, server_config.port)
+    log.debug('LED_SERVER Connected')
 
 
 def init_detector():
