@@ -24,6 +24,9 @@ def on_message(message, sender):
 	command = Command.parse(message)
 	
 	if command.action == "SET_MODE":	
+		log.debug('Command succesful, passing to LOGIC_SERVER.')
+		logic_client.send(command.serialize())	
+		
 		if command.parameter == "CONVERSATION" and system_online:				
 			log.info("Switch to conversation mode.")
 			lifecycle.ConversationMode()
@@ -41,9 +44,6 @@ def on_message(message, sender):
 			command_succesful = False
 			log.error('Invalid parameter: ' + command.parameter)	
 
-		log.debug('Command succesful, passing to LOGIC_SERVER.')
-		logic_client.send(command.serialize())	
-				
 	else:
 		log.error('Unkown command')
 
