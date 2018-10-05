@@ -22,6 +22,7 @@ class SocketServer():
         self.callbacks.append(callback)
 
     def start(self):
+        log.debug('Starting ' + self.name + ' at ' + str(server_config))
         self.is_running = True
         self.thread = Thread(target=self._start)
         self.thread.start()
