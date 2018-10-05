@@ -24,6 +24,9 @@ def on_message(message, sender):
 	command = Command.parse(message)
 	
 	if command.action == "SET_MODE":	
+		log.info('Command succesful, passing to LOGIC_SERVER.')
+		logic_client.send(command.serialize())	
+		
 		if command.parameter == "CONVERSATION" and system_online:				
 			log.info("Switch to conversation mode.")
 			lifecycle.ConversationMode()
@@ -39,17 +42,11 @@ def on_message(message, sender):
 			
 		else:
 			command_succesful = False
-			log.error('Invalid parameter: ' + command.parameter)
-		
-		if command_succesful:
-			log.debug('Command succesful, passing to LOGIC_SERVER.')
-			logic_client.send(command.serialize())
-			
-		else:
-			print('Failed to send ' + command.serialize() + ', Cubi in standby: ' + str(not system_online))
-			
+			log.error('Invalid parameter: ' + command.parameter)	
+
 	else:
 		log.error('Unkown command')
+
 
 
 def on_button_held():
