@@ -25,8 +25,7 @@ level = 1
 
 
 def close():
-    set_to_black_cmd = Command.create(
-        CommandType.set_color, '(0, 0, 0)').serialize()
+    set_to_black_cmd = Command.create(CommandType.set_color, '(0, 0, 0)').serialize()
     exit_cmd = Command.create(CommandType.exit).serialize()
 
     ledstrip_client.send(set_to_black_cmd)
@@ -61,8 +60,10 @@ def handle_emotion(emotion):
             handle_training_result(colors.get('red'))
 
     elif state == "CONVERSATION":
-        command = Command.create(
-            CommandType.set_color, str(emotion.color)).serialize()
+        if not emotion.enabled:
+            return
+        
+        command = Command.create(CommandType.set_color, str(emotion.color )).serialize()
         ledstrip_client.send(command)
 
     elif state == "STANDBY":
@@ -111,7 +112,7 @@ def training_cycle():
     detector.stop()
     log.debug('Stopped detector.')
 
-    training_emotion = random.choice(get_level(1))
+    training_emotion = random.choice(filter(lambda emotion: emotion.enabled, get_level(1)))
     log.debug('Random choice: ' + str(training_emotion.name))
 
     command = Command.create(CommandType.set_color, str(

@@ -11,6 +11,8 @@ def toggle_emotion(name):
     else:
         black_list.append(name)
 
+    print('DEBUG: black_list state: ' + str(black_list))
+
 def get_emotion_color(name, level):
     switch = {
         'angry': {
