@@ -10,15 +10,15 @@ log = Logger(__name__)
 class LedStrip:
 
     def __init__(self):
-        self.controller = ws.PixelStrip(lc.LED_COUNT, lc.LED_PIN, lc.LED_FREQ_HZ, lc.LED_DMA, lc.LED_INVERT, lc.LED_BRIGHTNESS, lc.LED_CHANNEL)
+        self.controller = ws.PixelStrip(
+            lc.LED_COUNT, lc.LED_PIN, lc.LED_FREQ_HZ, lc.LED_DMA, lc.LED_INVERT, lc.LED_BRIGHTNESS, lc.LED_CHANNEL)
         self.is_on = False
         self.controller.begin()
-        self.current_color = colors.convert_to_rgb(self.controller.getPixelColor(0))
-        self.transition_to((0,0,0), 100)
+        self.current_color = (0, 0, 0)
+        self.set_color((0, 0, 0))
 
     def start(self):
         assert not self.is_on
-        
 
         self.is_on = True
 
@@ -40,7 +40,8 @@ class LedStrip:
         r, g, b = self.current_color
         count = 0
 
-        log.info('Transition to: ' + str(color) + ', from ' + str(self.current_color))
+        log.info('Transition to: ' + str(color) +
+                 ', from ' + str(self.current_color))
 
         while r != color[0] or g != color[1] or b != color[2]:
             if r < color[0]:
@@ -68,7 +69,8 @@ class LedStrip:
                         self.controller.setPixelColor(i, c)
                         self.controller.show()
                     except:
-                        log.error('Faulty color: ' + str(c) + '  ' + str(r) + ' ' + str(g) + ' '  + str(b))
+                        log.error('Faulty color: ' + str(c) + '  ' +
+                                  str(r) + ' ' + str(g) + ' ' + str(b))
 
             if count % 1000 == 0:
                 break
