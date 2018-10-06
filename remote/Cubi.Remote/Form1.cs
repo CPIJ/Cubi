@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
@@ -10,7 +11,7 @@ namespace Cubi.Remote
     public partial class Form1 : Form
     {
         private readonly WebSocket ioClient;
-
+   
         public Form1()
         {
             ioClient = new WebSocket("ws://localhost:8002");
@@ -34,7 +35,7 @@ namespace Cubi.Remote
 
         private void CreateColorButtons()
         {
-            var buttons = Colors.RgbColors.Select((color, index) => new Button
+            var colorButtons = Colors.RgbColors.Select((color, index) => new Button
             {
                 BackColor = System.Drawing.Color.FromArgb(color.Value.Red, color.Value.Green, color.Value.Blue),
                 FlatStyle = FlatStyle.Flat,
@@ -49,7 +50,7 @@ namespace Cubi.Remote
                 AutoSizeMode = AutoSizeMode.GrowOnly
             });
 
-            foreach (var button in buttons)
+            foreach (var button in colorButtons)
             {
                 button.Click += setColorBtn_Click;
                 colorBox.Controls.Add(button);
@@ -96,6 +97,71 @@ namespace Cubi.Remote
             Command
                 .Create(CommandType.SetLed, Colors.Get(c => c.Name == resultColor))
                 .SendTo(ioClient);
+        }
+
+
+
+        private void ToggleConversationMode(bool enable)
+        {
+            foreach (var button in colorBox.Controls.OfType<Button>())
+            {
+                button.Enabled = enable;
+
+                if (!enable)
+                {
+                    button.BackColor = System.Drawing.Color.LightGray;
+                }
+                else
+                {
+                    var color = Colors.RgbColors.FirstOrDefault(c => c.Name == (string) button.Tag).Value;
+                    button.BackColor = System.Drawing.Color.FromArgb(color.Red, color.Green, color.Blue);
+                }
+            }
+
+            if (enable)
+            {
+                Command.Create(CommandType.SetMode, "CONVERSATION").SendTo(ioClient);
+            }
+        }
+
+        private void ToggleTrainingMode(bool enable)
+        {
+            cbxEmotionList.Enabled = enable;
+            btnStart.Enabled = enable;
+
+            if (enable)
+            {
+                Command.Create(CommandType.SetMode, "TRAINING").SendTo(ioClient);
+            }
+        }
+
+        private void rbTraining_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (!(sender is RadioButton button)) return;
+
+            ToggleTrainingMode(button.Checked);
+            ToggleConversationMode(!button.Checked);
+        }
+
+        private void rbConversation_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (!(sender is RadioButton button)) return;
+
+            ToggleTrainingMode(!button.Checked);
+            ToggleConversationMode(button.Checked);
+        }
+
+        private void rbStandby_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (!(sender is RadioButton button)) return;
+
+            ToggleTrainingMode(!button.Checked);
+            ToggleConversationMode(!button.Checked);
+
+            if (button.Checked)
+            {
+                Command.Create(CommandType.SetMode, "STANDBY").SendTo(ioClient);
+            }
         }
     }
 }

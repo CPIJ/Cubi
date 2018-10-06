@@ -1,14 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
 using WebSocketSharp;
 
 namespace Cubi.Remote
 {
-    public enum CommandType { SetLed }
-
     public class Command
     {
-        public string Action { get; private set; }
-        public string Parameter { get; private set; }
+        private string Action { get; set; }
+        private string Parameter { get; set; }
+        private static readonly Dictionary<CommandType, string> ActionNames = new Dictionary<CommandType, string>
+        {
+            { CommandType.SetLed, "SET_LED" },
+            { CommandType.SetMode, "SET_MODE" }
+        };
 
         private Command(string action, string parameter)
         {
@@ -18,18 +22,7 @@ namespace Cubi.Remote
 
         public static Command Create(CommandType type, string parameter)
         {
-            string action;
-
-            switch (type)
-            {
-                case CommandType.SetLed:
-                    action = "SET_LED";
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(type), type, null);
-            }
-
-            return new Command(action, parameter);
+            return new Command(ActionNames[type], parameter);
         }
 
         public void SendTo(WebSocket socket)
