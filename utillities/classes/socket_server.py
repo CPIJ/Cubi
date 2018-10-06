@@ -2,6 +2,9 @@ import socket
 import asyncio
 from threading import Thread
 from utillities.logger import Logger
+import re
+from base64 import b64encode
+from hashlib import sha1
 
 log = Logger(__name__)
 
@@ -39,10 +42,24 @@ class SocketServer():
 
     def _on_message(self, message):
         for callback in self.callbacks:
-            callback(message, self.name)
+            callback(message, self)
 
     def _on_new_client(self, client, address):
         log.info('New client connected: ' + str(address))
+        handshake = client.recv(1024).decode()
+        key = (re.search('Sec-WebSocket-Key:\s+(.*?)[\n\r]+', handshake).groups()[0].strip())
+        websocket_answer = (
+            'HTTP/1.1 101 Switching Protocols',
+            'Upgrade: websocket',
+            'Connection: Upgrade',
+            'Sec-WebSocket-Accept: {key}\r\n\r\n',
+        )
+
+        response_key = b64encode(sha1((key + '258EAFA5-E914-47DA-95CA-C5AB0DC85B11').encode()).digest())
+        response = '\r\n'.join(websocket_answer).format(key=response_key)
+
+        client.send(response.encode())
+
         while True:
             message = client.recv(1024).decode()
 
@@ -58,7 +75,8 @@ class SocketServer():
         while self.is_running:
             try:
                 client, address = self.server.accept()
-                Thread(target=self._on_new_client, args=(client, address)).start()
+                Thread(target=self._on_new_client,
+                       args=(client, address)).start()
             except:
                 log.info('Server shutting down.')
                 break
