@@ -9,15 +9,19 @@ namespace Cubi.Remote
 {
     public class Colors
     {
-        private static readonly Dictionary<string, Tuple<int, int, int>> RgbColors = JsonConvert
-            .DeserializeObject<IEnumerable<Color>>(File.ReadAllText("../../../../config/colors.json"))
-            .ToDictionary(k => k.Name, v => Tuple.Create(v.Rgb[0], v.Rgb[1], v.Rgb[2]));
+        public static readonly IEnumerable<Color> RgbColors = JsonConvert
+            .DeserializeObject<IEnumerable<Color>>(File.ReadAllText("../../../../config/colors.json"));
 
         public static string Get(string name)
         {
-            var color = RgbColors[name];
+            var color = RgbColors.FirstOrDefault(c => c.Name == name);
 
-            return color.ToString();
+            if (color == null)
+            {
+                throw new IndexOutOfRangeException();
+            }
+
+            return $"{color.Rgb[0]}:{color.Rgb[1]}:{color.Rgb[2]}";
         }
     }
 
@@ -25,6 +29,6 @@ namespace Cubi.Remote
     {
         public string Name { get; set; }
         public int[] Rgb { get; set; }
+        public string Emotion { get; set; }
     }
-
 }

@@ -29,128 +29,107 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.colorBox = new System.Windows.Forms.GroupBox();
-            this.btnRed = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.cbxEmotionList = new System.Windows.Forms.ComboBox();
+            this.colorBox = new System.Windows.Forms.GroupBox();
             this.panel1.SuspendLayout();
-            this.colorBox.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.colorBox);
+            this.panel1.Controls.Add(this.groupBox1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(230, 588);
+            this.panel1.Size = new System.Drawing.Size(155, 692);
             this.panel1.TabIndex = 0;
             // 
-            // colorBox
+            // groupBox1
             // 
-            this.colorBox.Controls.Add(this.button5);
-            this.colorBox.Controls.Add(this.button4);
-            this.colorBox.Controls.Add(this.button3);
-            this.colorBox.Controls.Add(this.button2);
-            this.colorBox.Controls.Add(this.button1);
-            this.colorBox.Controls.Add(this.btnRed);
-            this.colorBox.Dock = System.Windows.Forms.DockStyle.Top;
-            this.colorBox.Location = new System.Drawing.Point(0, 0);
-            this.colorBox.Name = "colorBox";
-            this.colorBox.Size = new System.Drawing.Size(230, 288);
-            this.colorBox.TabIndex = 1;
-            this.colorBox.TabStop = false;
-            this.colorBox.Text = "Colors";
+            this.groupBox1.AutoSize = true;
+            this.groupBox1.Controls.Add(this.groupBox2);
+            this.groupBox1.Controls.Add(this.colorBox);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox1.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.Location = new System.Drawing.Point(0, 0);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.groupBox1.Size = new System.Drawing.Size(155, 126);
+            this.groupBox1.TabIndex = 1;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Conversation mode";
             // 
-            // btnRed
+            // groupBox2
             // 
-            this.btnRed.BackColor = System.Drawing.Color.DarkRed;
-            this.btnRed.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRed.ForeColor = System.Drawing.Color.Black;
-            this.btnRed.Location = new System.Drawing.Point(12, 41);
-            this.btnRed.Name = "btnRed";
-            this.btnRed.Size = new System.Drawing.Size(30, 30);
-            this.btnRed.TabIndex = 1;
-            this.btnRed.Tag = "red";
-            this.btnRed.UseVisualStyleBackColor = false;
-            this.btnRed.Click += new System.EventHandler(this.setColorBtn_Click);
+            this.groupBox2.Controls.Add(this.button1);
+            this.groupBox2.Controls.Add(this.cbxEmotionList);
+            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox2.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox2.Location = new System.Drawing.Point(2, 30);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.groupBox2.Size = new System.Drawing.Size(151, 92);
+            this.groupBox2.TabIndex = 2;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Training mode";
             // 
             // button1
             // 
-            this.button1.BackColor = System.Drawing.Color.White;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.ForeColor = System.Drawing.Color.Black;
-            this.button1.Location = new System.Drawing.Point(48, 41);
+            this.button1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.button1.Location = new System.Drawing.Point(2, 51);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(30, 30);
-            this.button1.TabIndex = 2;
-            this.button1.Tag = "white";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.setColorBtn_Click);
+            this.button1.Size = new System.Drawing.Size(147, 35);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "Start";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.btnStart_Click);
             // 
-            // button2
+            // cbxEmotionList
             // 
-            this.button2.BackColor = System.Drawing.Color.DarkRed;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.ForeColor = System.Drawing.Color.Black;
-            this.button2.Location = new System.Drawing.Point(84, 41);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(30, 30);
-            this.button2.TabIndex = 3;
-            this.button2.Tag = "red";
-            this.button2.UseVisualStyleBackColor = false;
+            this.cbxEmotionList.Dock = System.Windows.Forms.DockStyle.Top;
+            this.cbxEmotionList.FormattingEnabled = true;
+            this.cbxEmotionList.Location = new System.Drawing.Point(2, 23);
+            this.cbxEmotionList.Name = "cbxEmotionList";
+            this.cbxEmotionList.Size = new System.Drawing.Size(147, 28);
+            this.cbxEmotionList.TabIndex = 1;
             // 
-            // button3
+            // colorBox
             // 
-            this.button3.BackColor = System.Drawing.Color.DarkRed;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.ForeColor = System.Drawing.Color.Black;
-            this.button3.Location = new System.Drawing.Point(120, 41);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(30, 30);
-            this.button3.TabIndex = 4;
-            this.button3.Tag = "red";
-            this.button3.UseVisualStyleBackColor = false;
-            // 
-            // button4
-            // 
-            this.button4.BackColor = System.Drawing.Color.DarkRed;
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.ForeColor = System.Drawing.Color.Black;
-            this.button4.Location = new System.Drawing.Point(156, 41);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(30, 30);
-            this.button4.TabIndex = 5;
-            this.button4.Tag = "red";
-            this.button4.UseVisualStyleBackColor = false;
-            // 
-            // button5
-            // 
-            this.button5.BackColor = System.Drawing.Color.DarkRed;
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.ForeColor = System.Drawing.Color.Black;
-            this.button5.Location = new System.Drawing.Point(192, 41);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(30, 30);
-            this.button5.TabIndex = 6;
-            this.button5.Tag = "red";
-            this.button5.UseVisualStyleBackColor = false;
+            this.colorBox.AutoSize = true;
+            this.colorBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.colorBox.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.colorBox.Location = new System.Drawing.Point(2, 23);
+            this.colorBox.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.colorBox.Name = "colorBox";
+            this.colorBox.Padding = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.colorBox.Size = new System.Drawing.Size(151, 7);
+            this.colorBox.TabIndex = 1;
+            this.colorBox.TabStop = false;
+            this.colorBox.Text = "Set Color";
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1067, 588);
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(497, 692);
             this.Controls.Add(this.panel1);
-            this.Font = new System.Drawing.Font("Montserrat", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Font = new System.Drawing.Font("Arial Narrow", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Cubi Remote";
             this.panel1.ResumeLayout(false);
-            this.colorBox.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -159,12 +138,10 @@
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.GroupBox colorBox;
-        private System.Windows.Forms.Button btnRed;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ComboBox cbxEmotionList;
     }
 }
 
