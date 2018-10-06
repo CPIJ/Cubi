@@ -3,8 +3,8 @@ using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
-using Cubi.Remote.Winforms;
-using CommandType = Cubi.Remote.Winforms.CommandType;
+using Cubi.Remote.Logic;
+using CommandType = Cubi.Remote.Logic.CommandType;
 
 namespace Cubi.Remote
 {

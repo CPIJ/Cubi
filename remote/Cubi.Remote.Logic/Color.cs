@@ -1,4 +1,4 @@
-﻿namespace Cubi.Remote.Winforms
+﻿namespace Cubi.Remote.Logic
 {
     public class Color
     {

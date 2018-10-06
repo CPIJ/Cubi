@@ -3,8 +3,9 @@ using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
+using Cubi.Remote.Logic;
 
-namespace Cubi.Remote.Winforms
+namespace Cubi.Remote
 {
     public partial class ConversationModeForm : Form
     {

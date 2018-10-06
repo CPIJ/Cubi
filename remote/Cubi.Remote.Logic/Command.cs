@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using WebSocketSharp;
 
-namespace Cubi.Remote.Winforms
+namespace Cubi.Remote.Logic
 {
     public class Command
     {

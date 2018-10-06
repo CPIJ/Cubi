@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Cubi.Remote.Winforms.Winforms.Properties
+namespace Cubi.Remote.Properties
 {
 
 

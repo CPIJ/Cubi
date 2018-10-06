@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
+using Cubi.Remote.Logic;
 
-namespace Cubi.Remote.Winforms
+namespace Cubi.Remote
 {
     static class Program
     {
