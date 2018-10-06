@@ -50,8 +50,6 @@ class SocketServer():
                 log.info('Client ' + str(address) + ' disconnected')
                 break
 
-            log.info(message)
-
             self._on_message(message)
 
         client.close()
