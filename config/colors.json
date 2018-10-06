@@ -1,9 +1,9 @@
 [
-  { "name": "red", "rgb": [255, 0, 0], "emotion": "angry" },
-  { "name": "green", "rgb": [0, 255, 0], "emotion": "fear" },
-  { "name": "yellow", "rgb": [255, 255, 0], "emotion": "happy" },
-  { "name": "blue", "rgb": [0, 0, 255], "emotion": "sad" },
-  { "name": "purple", "rgb": [255, 0, 255], "emotion": "disgust" },
-  { "name": "cyan", "rgb": [0, 255, 255], "emotion": "surprise" },
-  { "name": "white", "rgb": [255, 255, 255], "emotion": "neutral" }
+  { "name": "red", "value": "(255, 0, 0)", "emotion": "angry" },
+  { "name": "green", "value": "(0, 255, 0)", "emotion": "fear" },
+  { "name": "yellow", "value": "(255, 255, 0)", "emotion": "happy" },
+  { "name": "blue", "value": "(0, 0, 255)", "emotion": "sad" },
+  { "name": "purple", "value": "(255, 0, 255)", "emotion": "disgust" },
+  { "name": "cyan", "value": "(0, 255, 255)", "emotion": "surprise" },
+  { "name": "white", "value": "(255, 255, 255)", "emotion": "neutral" }
 ]

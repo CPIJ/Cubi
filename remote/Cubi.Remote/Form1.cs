@@ -22,13 +22,14 @@ namespace Cubi.Remote
         private void InitEmotionList()
         {
             cbxEmotionList.Items.AddRange(Colors.RgbColors.Select(c => c.Emotion).ToArray());
+            cbxEmotionList.SelectedIndex = 0;
         }
 
         private void CreateColorButtons()
         {
             var buttons = Colors.RgbColors.Select((color, index) => new Button
             {
-                BackColor = System.Drawing.Color.FromArgb(color.Rgb[0], color.Rgb[1], color.Rgb[2]),
+                BackColor = System.Drawing.Color.FromArgb(color.Value.Red, color.Value.Green, color.Value.Blue),
                 FlatStyle = FlatStyle.Flat,
                 ForeColor = System.Drawing.Color.Black,
                 Location = new System.Drawing.Point(10, 41),
@@ -53,13 +54,16 @@ namespace Cubi.Remote
             if (!(sender is Button button)) return;
             if (!(button.Tag is string colorName)) return;
 
-            var command = Command.Create(CommandType.SetLed, Colors.Get(colorName));
+            var command = Command.Create(CommandType.SetLed, Colors.Get(c => c.Name == colorName));
             command.SendTo(ioClient);
         }
 
         private void btnStart_Click(object sender, System.EventArgs e)
         {
-
+            if (cbxEmotionList.SelectedItem is string emotion)
+            {
+                string color = Colors.Get(c => c.Emotion == emotion);
+            }
         }
     }
 }
