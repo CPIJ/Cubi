@@ -16,7 +16,7 @@ namespace Cubi.Remote.Winforms
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ConversationModeForm());
+            Application.Run(new ModeSelectionForm());
         }
     }
 }

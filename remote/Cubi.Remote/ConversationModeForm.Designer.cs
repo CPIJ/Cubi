@@ -31,6 +31,8 @@
             this.lblSetColor = new System.Windows.Forms.Label();
             this.pnlColors = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btnBack = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblSetColor
@@ -60,6 +62,7 @@
             this.button1.Dock = System.Windows.Forms.DockStyle.Top;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Location = new System.Drawing.Point(0, 39);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 3, 3, 30);
             this.button1.Name = "button1";
             this.button1.Padding = new System.Windows.Forms.Padding(5);
             this.button1.Size = new System.Drawing.Size(311, 45);
@@ -67,13 +70,37 @@
             this.button1.Text = "Reset";
             this.button1.UseVisualStyleBackColor = true;
             // 
+            // panel1
+            // 
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 84);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(311, 30);
+            this.panel1.TabIndex = 3;
+            // 
+            // btnBack
+            // 
+            this.btnBack.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBack.Location = new System.Drawing.Point(0, 114);
+            this.btnBack.Margin = new System.Windows.Forms.Padding(3, 3, 3, 30);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Padding = new System.Windows.Forms.Padding(5);
+            this.btnBack.Size = new System.Drawing.Size(311, 45);
+            this.btnBack.TabIndex = 4;
+            this.btnBack.Text = "Back";
+            this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
+            // 
             // ConversationModeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(311, 91);
+            this.ClientSize = new System.Drawing.Size(311, 161);
+            this.Controls.Add(this.btnBack);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.pnlColors);
             this.Controls.Add(this.lblSetColor);
@@ -91,5 +118,7 @@
         private System.Windows.Forms.Label lblSetColor;
         private System.Windows.Forms.Panel pnlColors;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button btnBack;
     }
 }

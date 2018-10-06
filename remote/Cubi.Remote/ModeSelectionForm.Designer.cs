@@ -28,29 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnConversation = new System.Windows.Forms.Button();
+            this.btnTraining = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // button1
+            // btnConversation
             // 
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(13, 13);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(101, 37);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Conversation";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnConversation.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnConversation.Location = new System.Drawing.Point(13, 13);
+            this.btnConversation.Name = "btnConversation";
+            this.btnConversation.Size = new System.Drawing.Size(101, 37);
+            this.btnConversation.TabIndex = 0;
+            this.btnConversation.Text = "Conversation";
+            this.btnConversation.UseVisualStyleBackColor = true;
+            this.btnConversation.Click += new System.EventHandler(this.button1_Click);
             // 
-            // button2
+            // btnTraining
             // 
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(13, 56);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(101, 37);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Training";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnTraining.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTraining.Location = new System.Drawing.Point(13, 56);
+            this.btnTraining.Name = "btnTraining";
+            this.btnTraining.Size = new System.Drawing.Size(101, 37);
+            this.btnTraining.TabIndex = 1;
+            this.btnTraining.Text = "Training";
+            this.btnTraining.UseVisualStyleBackColor = true;
+            this.btnTraining.Click += new System.EventHandler(this.btnTraining_Click);
             // 
             // ModeSelectionForm
             // 
@@ -58,8 +60,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(136, 105);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnTraining);
+            this.Controls.Add(this.btnConversation);
             this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "ModeSelectionForm";
@@ -70,7 +72,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnConversation;
+        private System.Windows.Forms.Button btnTraining;
     }
 }

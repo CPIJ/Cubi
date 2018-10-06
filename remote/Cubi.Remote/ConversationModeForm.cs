@@ -41,11 +41,17 @@ namespace Cubi.Remote.Winforms
         private void setColorBtn_Click(object sender, EventArgs e)
         {
             if (!(sender is Button button)) return;
+
             string color = (string) button.Tag;
 
             Command
                 .Create(CommandType.SetLed, Colors.Get(c => c.Name == color))
                 .SendTo(WebSockets.IoClient);
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }
