@@ -28,6 +28,9 @@ namespace Cubi.Remote.Winforms
             frm.FormClosing += delegate { Show(); };
             frm.Show();
 
+            Command.Create(CommandType.SetMode, "STANDBY").SendTo(WebSockets.IoClient);
+            Command.Create(CommandType.SetMode, "CONVERSATION").SendTo(WebSockets.IoClient);
+
             Hide();
         }
 
@@ -41,6 +44,9 @@ namespace Cubi.Remote.Winforms
 
             frm.FormClosing += delegate { Show(); };
             frm.Show();
+
+            Command.Create(CommandType.SetMode, "STANDBY").SendTo(WebSockets.IoClient);
+            Command.Create(CommandType.SetMode, "TRAINING").SendTo(WebSockets.IoClient);
 
             Hide();
         }

@@ -30,8 +30,8 @@
         {
             this.lblSetColor = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.cbxEmotionList = new System.Windows.Forms.ComboBox();
             this.btnStart = new System.Windows.Forms.Button();
+            this.cbxEmotionList = new System.Windows.Forms.ComboBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnBack = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
@@ -61,16 +61,6 @@
             this.panel1.Size = new System.Drawing.Size(281, 79);
             this.panel1.TabIndex = 3;
             // 
-            // cbxEmotionList
-            // 
-            this.cbxEmotionList.Dock = System.Windows.Forms.DockStyle.Top;
-            this.cbxEmotionList.FormattingEnabled = true;
-            this.cbxEmotionList.Location = new System.Drawing.Point(5, 5);
-            this.cbxEmotionList.Margin = new System.Windows.Forms.Padding(5);
-            this.cbxEmotionList.Name = "cbxEmotionList";
-            this.cbxEmotionList.Size = new System.Drawing.Size(271, 24);
-            this.cbxEmotionList.TabIndex = 0;
-            // 
             // btnStart
             // 
             this.btnStart.Dock = System.Windows.Forms.DockStyle.Top;
@@ -84,6 +74,16 @@
             this.btnStart.Text = "Start";
             this.btnStart.UseVisualStyleBackColor = true;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
+            // 
+            // cbxEmotionList
+            // 
+            this.cbxEmotionList.Dock = System.Windows.Forms.DockStyle.Top;
+            this.cbxEmotionList.FormattingEnabled = true;
+            this.cbxEmotionList.Location = new System.Drawing.Point(5, 5);
+            this.cbxEmotionList.Margin = new System.Windows.Forms.Padding(5);
+            this.cbxEmotionList.Name = "cbxEmotionList";
+            this.cbxEmotionList.Size = new System.Drawing.Size(271, 24);
+            this.cbxEmotionList.TabIndex = 0;
             // 
             // panel2
             // 

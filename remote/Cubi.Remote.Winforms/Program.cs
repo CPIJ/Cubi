@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Cubi.Remote.Winforms
@@ -16,7 +13,14 @@ namespace Cubi.Remote.Winforms
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ModeSelectionForm());
+
+            var form = new ModeSelectionForm();
+            form.Closing += (sender, args) =>
+            {
+                WebSockets.CloseAll();
+            };
+
+            Application.Run(form);
         }
     }
 }

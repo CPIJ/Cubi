@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -28,7 +29,7 @@ namespace Cubi.Remote.Winforms
                 UseVisualStyleBackColor = false,
                 AutoSize = true,
                 AutoSizeMode = AutoSizeMode.GrowOnly,
-                Text = color.Emotion
+                Text = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(color.Emotion)
             });
 
             foreach (var button in colorButtons)
@@ -51,6 +52,7 @@ namespace Cubi.Remote.Winforms
 
         private void btnBack_Click(object sender, EventArgs e)
         {
+            Command.Create(CommandType.SetMode, "STANDBY").SendTo(WebSockets.IoClient);
             Close();
         }
     }

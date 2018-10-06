@@ -57,5 +57,13 @@ namespace Cubi.Remote.Winforms
 
             return Sockets[name].WebSocket;
         }
+
+        public static void CloseAll()
+        {
+            foreach (var socket in Sockets.Values.Where(c => c.WebSocket != null && c.WebSocket.ReadyState == WebSocketState.Open).Select(c => c.WebSocket))
+            {
+                socket.Close(CloseStatusCode.Normal);
+            }
+        }
     }
 }

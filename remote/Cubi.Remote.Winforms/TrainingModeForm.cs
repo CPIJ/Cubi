@@ -29,6 +29,7 @@ namespace Cubi.Remote
 
         private void btnBack_Click(object sender, EventArgs e)
         {
+            Command.Create(CommandType.SetMode, "STANDBY").SendTo(WebSockets.IoClient);
             Close();
         }
 
@@ -39,7 +40,7 @@ namespace Cubi.Remote
             string color = Colors.Get(c => c.Emotion == emotion.ToLower());
             const string black = "(0,0,0)";
             const int seconds = 3;
-            const int delay = 1000;
+            const int delay = 500;
 
             for (int i = 0; i < seconds; i++)
             {
