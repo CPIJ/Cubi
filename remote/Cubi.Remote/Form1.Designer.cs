@@ -44,9 +44,9 @@
             this.panel1.Controls.Add(this.groupBox1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(155, 692);
+            this.panel1.Size = new System.Drawing.Size(177, 588);
             this.panel1.TabIndex = 0;
             // 
             // groupBox1
@@ -55,12 +55,12 @@
             this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Controls.Add(this.colorBox);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox1.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 4, 2, 4);
-            this.groupBox1.Size = new System.Drawing.Size(155, 126);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.groupBox1.Size = new System.Drawing.Size(177, 108);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Conversation mode";
@@ -70,12 +70,12 @@
             this.groupBox2.Controls.Add(this.button1);
             this.groupBox2.Controls.Add(this.cbxEmotionList);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox2.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(2, 30);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.groupBox2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox2.Location = new System.Drawing.Point(2, 27);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 4, 2, 4);
-            this.groupBox2.Size = new System.Drawing.Size(151, 92);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.groupBox2.Size = new System.Drawing.Size(173, 78);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Training mode";
@@ -83,9 +83,10 @@
             // button1
             // 
             this.button1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button1.Location = new System.Drawing.Point(2, 51);
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Location = new System.Drawing.Point(2, 48);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(147, 35);
+            this.button1.Size = new System.Drawing.Size(169, 30);
             this.button1.TabIndex = 1;
             this.button1.Text = "Start";
             this.button1.UseVisualStyleBackColor = true;
@@ -95,9 +96,9 @@
             // 
             this.cbxEmotionList.Dock = System.Windows.Forms.DockStyle.Top;
             this.cbxEmotionList.FormattingEnabled = true;
-            this.cbxEmotionList.Location = new System.Drawing.Point(2, 23);
+            this.cbxEmotionList.Location = new System.Drawing.Point(2, 22);
             this.cbxEmotionList.Name = "cbxEmotionList";
-            this.cbxEmotionList.Size = new System.Drawing.Size(147, 28);
+            this.cbxEmotionList.Size = new System.Drawing.Size(169, 26);
             this.cbxEmotionList.TabIndex = 1;
             // 
             // colorBox
@@ -105,24 +106,24 @@
             this.colorBox.AutoSize = true;
             this.colorBox.Dock = System.Windows.Forms.DockStyle.Top;
             this.colorBox.Font = new System.Drawing.Font("Arial Narrow", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.colorBox.Location = new System.Drawing.Point(2, 23);
-            this.colorBox.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.colorBox.Location = new System.Drawing.Point(2, 22);
+            this.colorBox.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.colorBox.Name = "colorBox";
-            this.colorBox.Padding = new System.Windows.Forms.Padding(2, 4, 2, 4);
-            this.colorBox.Size = new System.Drawing.Size(151, 7);
+            this.colorBox.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.colorBox.Size = new System.Drawing.Size(173, 5);
             this.colorBox.TabIndex = 1;
             this.colorBox.TabStop = false;
             this.colorBox.Text = "Set Color";
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(497, 692);
+            this.ClientSize = new System.Drawing.Size(568, 588);
             this.Controls.Add(this.panel1);
-            this.Font = new System.Drawing.Font("Arial Narrow", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Form1";
             this.Text = "Cubi Remote";
             this.panel1.ResumeLayout(false);

@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.Globalization;
+using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 using WebSocketSharp;
@@ -21,7 +23,12 @@ namespace Cubi.Remote
 
         private void InitEmotionList()
         {
-            cbxEmotionList.Items.AddRange(Colors.RgbColors.Select(c => c.Emotion).ToArray());
+            cbxEmotionList.Items.AddRange(
+                Colors.RgbColors
+                    .Select(c => CultureInfo.CurrentCulture.TextInfo.ToTitleCase(c.Emotion.ToLower()))
+                    .ToArray()
+            );
+
             cbxEmotionList.SelectedIndex = 0;
         }
 
@@ -60,10 +67,35 @@ namespace Cubi.Remote
 
         private void btnStart_Click(object sender, System.EventArgs e)
         {
-            if (cbxEmotionList.SelectedItem is string emotion)
+            if (!(cbxEmotionList.SelectedItem is string emotion)) return;
+
+            string color = Colors.Get(c => c.Emotion == emotion.ToLower());
+            const string black = "(0,0,0)";
+            const int seconds = 3;
+            const int delay = 1000;
+
+            for (int i = 0; i < seconds; i++)
             {
-                string color = Colors.Get(c => c.Emotion == emotion);
+                Command
+                    .Create(CommandType.SetLed, color)
+                    .SendTo(ioClient);
+
+                AutoClosingMessageBox.Show((seconds - i).ToString(), $"Emotion: {emotion}", delay);
+
+                Command
+                    .Create(CommandType.SetLed, black)
+                    .SendTo(ioClient);
+
+                Thread.Sleep(delay);
             }
+
+            string resultColor = MessageBox.Show("Was the emotion correct?", "Result", MessageBoxButtons.YesNo) == DialogResult.Yes 
+                ? "green" 
+                : "red";
+
+            Command
+                .Create(CommandType.SetLed, Colors.Get(c => c.Name == resultColor))
+                .SendTo(ioClient);
         }
     }
 }
