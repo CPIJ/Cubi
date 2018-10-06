@@ -50,6 +50,11 @@ namespace Cubi.Remote.Winforms
                 Sockets[name].WebSocket.Connect();
             }
 
+            if (Sockets[name].WebSocket.ReadyState != WebSocketState.Open)
+            {
+                throw new Exception("Connection is closed!");
+            }
+
             return Sockets[name].WebSocket;
         }
     }
