@@ -1,22 +1,14 @@
-﻿using System.Collections.Generic;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
-using System.Windows.Forms.VisualStyles;
-using WebSocketSharp;
 
 namespace Cubi.Remote
 {
     public partial class Form1 : Form
     {
-        private readonly WebSocket ioClient;
-   
         public Form1()
         {
-            ioClient = new WebSocket("ws://localhost:8002");
-            ioClient.Connect();
-
             InitializeComponent();
             CreateColorButtons();
             InitEmotionList();
@@ -63,7 +55,7 @@ namespace Cubi.Remote
             if (!(button.Tag is string colorName)) return;
 
             var command = Command.Create(CommandType.SetLed, Colors.Get(c => c.Name == colorName));
-            command.SendTo(ioClient);
+            command.SendTo(WebSockets.IoClient);
         }
 
         private void btnStart_Click(object sender, System.EventArgs e)
@@ -79,13 +71,13 @@ namespace Cubi.Remote
             {
                 Command
                     .Create(CommandType.SetLed, color)
-                    .SendTo(ioClient);
+                    .SendTo(WebSockets.IoClient);
 
                 AutoClosingMessageBox.Show((seconds - i).ToString(), $"Emotion: {emotion}", delay);
 
                 Command
                     .Create(CommandType.SetLed, black)
-                    .SendTo(ioClient);
+                    .SendTo(WebSockets.IoClient);
 
                 Thread.Sleep(delay);
             }
@@ -96,7 +88,7 @@ namespace Cubi.Remote
 
             Command
                 .Create(CommandType.SetLed, Colors.Get(c => c.Name == resultColor))
-                .SendTo(ioClient);
+                .SendTo(WebSockets.IoClient);
         }
 
 
@@ -120,7 +112,7 @@ namespace Cubi.Remote
 
             if (enable)
             {
-                Command.Create(CommandType.SetMode, "CONVERSATION").SendTo(ioClient);
+                Command.Create(CommandType.SetMode, "CONVERSATION").SendTo(WebSockets.IoClient);
             }
         }
 
@@ -131,7 +123,7 @@ namespace Cubi.Remote
 
             if (enable)
             {
-                Command.Create(CommandType.SetMode, "TRAINING").SendTo(ioClient);
+                Command.Create(CommandType.SetMode, "TRAINING").SendTo(WebSockets.IoClient);
             }
         }
 
@@ -160,7 +152,7 @@ namespace Cubi.Remote
 
             if (button.Checked)
             {
-                Command.Create(CommandType.SetMode, "STANDBY").SendTo(ioClient);
+                Command.Create(CommandType.SetMode, "STANDBY").SendTo(WebSockets.IoClient);
             }
         }
     }
