@@ -6,7 +6,7 @@ using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Cubi.Remote
+namespace Cubi.Remote.Winforms
 {
     public class Colors
     {

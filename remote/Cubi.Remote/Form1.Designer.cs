@@ -1,4 +1,4 @@
-﻿namespace Cubi.Remote
+﻿namespace Cubi.Remote.Winforms
 {
     partial class Form1
     {

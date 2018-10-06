@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using WebSocketSharp;
 
-namespace Cubi.Remote
+namespace Cubi.Remote.Winforms
 {
     public class Command
     {

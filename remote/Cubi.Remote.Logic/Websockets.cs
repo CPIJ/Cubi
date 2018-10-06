@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using WebSocketSharp;
 
-namespace Cubi.Remote
+namespace Cubi.Remote.Winforms
 {
     public class SocketConfig
     {

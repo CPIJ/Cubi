@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 
-namespace Cubi.Remote
+namespace Cubi.Remote.Winforms
 {
     public partial class Form1 : Form
     {
