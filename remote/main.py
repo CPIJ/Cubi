@@ -20,7 +20,7 @@ def get_color(emotion_name):
         return emotion.color
     except:
         print(f'{emotion_name} does not exist')
-        return (0, 0, 0)
+        return False
 
 
 def handle_io_command(command, server):
@@ -30,6 +30,10 @@ def handle_io_command(command, server):
 
 def train(emotion_name, server):
     color = get_color(emotion_name.lower())
+
+    if not color:
+        return
+
     delay = 0.8
 
     for i in range(3):
@@ -57,6 +61,10 @@ def handle_led_command(command, server):
         except:
             emotion_name = command.parameter.lower()
             color = get_color(emotion_name)
+
+            if not color:
+                return
+
             command.parameter = str(color)
 
         server.send(command.serialize())
@@ -77,7 +85,7 @@ def handle_command(command, servers):
         handle_io_command(command, servers["io_server"])
     else:
         log.error('Unkown command')
-        
+
     return True
 
 

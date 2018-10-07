@@ -1,3 +1,18 @@
+import json
+
+colors = []
+
+def load_colors():
+    global colors
+
+    if len(colors) == 0:
+        with open('config/colors.json') as file:
+            data = json.load(file)
+            colors = data
+    
+    return colors
+
+
 def Color(red, green, blue):
     """Convert the provided red, green, blue color to a 24-bit color value.
     Each color component should be a value 0-255 where 0 is the lowest intensity
@@ -7,15 +22,11 @@ def Color(red, green, blue):
 
 
 def get(name):
-    switch = {
-        'red': (255, 0, 0),
-        'green': (0, 255, 0),
-        'yellow': (255, 255, 0),
-        'blue': (0, 0, 255),
-        'purple': (255, 0, 255),
-        'cyan': (0, 255, 255),
-        'white': (255, 255, 255),
-    }
+    colors = load_colors()
+    switch = {}
+
+    for color in colors:
+        switch[color["name"]] = eval(color["value"])
 
     return switch.get(name, (0, 0, 0))
 
