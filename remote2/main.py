@@ -1,4 +1,5 @@
 import utillities.colors as colors
+import argparse
 from config.socket_config import get_server_config
 from utillities.classes.socket_client import SocketClient
 from utillities.socket_protocol import Command, CommandType
@@ -6,7 +7,6 @@ from utillities.models.emotion import get_level
 from utillities.logger import Logger
 from time import sleep
 
-test_mode = True
 led_server_commands = ["SET_COLOR", "TRAIN"]
 io_server_commands = ["SET_MODE"]
 log = Logger(__name__)
@@ -16,7 +16,7 @@ level = 1
 def get_color(emotion_name):
     emotions = get_level(level)
     try:
-        emotion = next((filter(lambda emotion: emotion.name ==emotion_name, [x[1] for x in emotions.items()])))
+        emotion = next((filter(lambda emotion: emotion.name == emotion_name, [x[1] for x in emotions.items()])))
         return emotion.color
     except:
         print(f'{emotion_name} does not exist')
@@ -79,9 +79,11 @@ def handle_command(command, servers):
     return True
 
 
-def start_servers():
-    io_server_config = get_server_config("IO_SERVER", is_test=test_mode)
-    led_server_config = get_server_config("LED_SERVER", is_test=test_mode)
+def start_servers(test_mode_enabled):
+    io_server_config = get_server_config(
+        "IO_SERVER", is_test=test_mode_enabled)
+    led_server_config = get_server_config(
+        "LED_SERVER", is_test=test_mode_enabled)
 
     io_server = SocketClient(io_server_config.host, io_server_config.port)
     led_server = SocketClient(led_server_config.host, led_server_config.port)
@@ -93,7 +95,11 @@ def start_servers():
 
 
 def main():
-    servers = start_servers()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--test', action='store_true')
+    args = parser.parse_args()
+
+    servers = start_servers(args.test)
 
     while True:
         command = Command.parse(input("Enter Command: "))
