@@ -21,17 +21,17 @@ def get_emotion_color(name, level):
             3: colors.get('white')
         },
         'disgust': {
-            1: colors.get('purple'),
+            1: colors.get('orange'),
             2: colors.get('red'),
             3: colors.get('white')
         },
         'fear': {
-            1: colors.get('green'),
+            1: colors.get('yellow'),
             2: colors.get('red'),
             3: colors.get('white')
         },
         'happy': {
-            1: colors.get('yellow'),
+            1: colors.get('green'),
             2: colors.get('green'),
             3: colors.get('white')
         },
@@ -41,7 +41,7 @@ def get_emotion_color(name, level):
             3: colors.get('white')
         },
         'surprise': {
-            1: colors.get('lightblue'),
+            1: colors.get('pink'),
             2: colors.get('green'),
             3: colors.get('white')
         },

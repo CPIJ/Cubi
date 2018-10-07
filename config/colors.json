@@ -1,9 +1,9 @@
 [
   { "name": "red", "value": "(229, 59, 44)", "emotion": "angry" },
-  { "name": "green", "value": "(254, 239, 14)", "emotion": "fear" },
-  { "name": "yellow", "value": "(87, 162, 61)", "emotion": "happy" },
+  { "name": "yellow", "value": "(254, 239, 14)", "emotion": "fear" },
+  { "name": "green", "value": "(87, 162, 61)", "emotion": "happy" },
   { "name": "blue", "value": "(0, 114, 174)", "emotion": "sad" },
-  { "name": "purple", "value": "(244, 159, 42)", "emotion": "disgust" },
-  { "name": "cyan", "value": "(246, 170, 200)", "emotion": "surprise" },
+  { "name": "orange", "value": "(244, 159, 42)", "emotion": "disgust" },
+  { "name": "pink", "value": "(246, 170, 200)", "emotion": "surprise" },
   { "name": "white", "value": "(255, 255, 255)", "emotion": "neutral" }
 ]
