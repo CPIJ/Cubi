@@ -12,3 +12,7 @@ Cubi knipperd drie keer, daarna word je gevraagt aan te geven of de getoonde emo
 Als je Y invoert word Cubi groen anders word hij rood.
 
 met SET_MODE:CONVERSATION zet je cubi in de gespreksmodus en met SET_MODE:TRAINING zet je hem in traningmodus 
+
+
+
+Om op te starten voer je "remote/start.bat" (incl. quotes) vanuit de hoofdmap
