@@ -1,0 +1,14 @@
+Met deze remote kan je berichten sturen naar de IO en LED server, de weet welk bericht waar naartoe moet.
+De kleur kan gezet worden op twee manieren, met een RGB waarde of een emotie naam bv,
+
+SET_COLOR:(12,44,255)
+SET_COLOR:HAPPY
+
+Om een trainingsessie te simuleren kan het volgende commando gebruikt worden,
+
+TRAIN:HAPPY
+
+Cubi knipperd drie keer, daarna word je gevraagt aan te geven of de getoonde emotie juist was.
+Als je Y invoert word Cubi groen anders word hij rood.
+
+met SET_MODE:CONVERSATION zet je cubi in de gespreksmodus en met SET_MODE:TRAINING zet je hem in traningmodus 
