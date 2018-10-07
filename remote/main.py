@@ -75,15 +75,15 @@ def handle_command(command, servers):
         handle_led_command(command, servers["led_server"])
     elif command.action in io_server_commands:
         handle_io_command(command, servers["io_server"])
-
+    else:
+        log.error('Unkown command')
+        
     return True
 
 
 def start_servers(test_mode_enabled):
-    io_server_config = get_server_config(
-        "IO_SERVER", is_test=test_mode_enabled)
-    led_server_config = get_server_config(
-        "LED_SERVER", is_test=test_mode_enabled)
+    io_server_config = get_server_config("IO_SERVER", is_test=test_mode_enabled)
+    led_server_config = get_server_config("LED_SERVER", is_test=test_mode_enabled)
 
     io_server = SocketClient(io_server_config.host, io_server_config.port)
     led_server = SocketClient(led_server_config.host, led_server_config.port)
