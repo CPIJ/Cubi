@@ -121,7 +121,7 @@ def init_logic_client():
 def main():
 	init_button()
 	init_server()
-	#init_logic_client()
+	init_logic_client()
 		
 	pause()
 

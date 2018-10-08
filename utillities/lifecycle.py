@@ -52,34 +52,29 @@ def set_button_color(color):
 def startup():
 	log.info("Entering startup")
 
-	for (index, color) in enumerate(color_cycle):
-		if index > 0:
-			c1 = colors.get(color_cycle[index - 1])
-			c2 = colors.get(color_cycle[index])
-			transition_to(c1, c2)
-		else:
-			leds.update(Leds.rgb_on(colors.get(color)))
-			time.sleep(0.2)
-
+	play_sound(music.get_music('power_on'))
 	leds.update(Leds.privacy_on())
 
 
-
 def ConversationMode():
-	pass
+	play_sound(music.get_music('mode_change'))
+
 
 
 def LearningMode():
-	pass
+	play_sound(music.get_music('mode_change'))
 
 
-def stand_by():
-	pass
+
+def stand_by(is_standby):
+	play_sound(music.get_music('power_on'))
+
 
 
 def power_off():
 	global state
 	log.info("Entering standby")
+	play_sound(music.get_music('power_off'))
 	x = 25
 	leds.update(Leds.rgb_on((x,x,x)))
 	leds.update(Leds.privacy_off())
@@ -87,7 +82,6 @@ def power_off():
 
 if __name__ == '__main__':
 	from time import sleep
-	
 	play_sound(music.get_music('power_on'))
 	sleep(1)
 	play_sound(music.get_music("power_off"))
