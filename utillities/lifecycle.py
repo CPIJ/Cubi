@@ -1,3 +1,4 @@
+
 import time
 import utillities.colors as colors
 import os
@@ -75,8 +76,7 @@ def power_off():
 	global state
 	log.info("Entering standby")
 	play_sound(music.get_music('power_off'))
-	x = 25
-	leds.update(Leds.rgb_on((x,x,x)))
+	leds.update(Leds.rgb_on((0, 0, 0)))
 	leds.update(Leds.privacy_off())
 
 

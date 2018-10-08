@@ -25,6 +25,8 @@ def on_message(message, sender):
 	command = Command.parse(message)
 	
 	if command.action == "SET_MODE":	
+		print('Got mode change: ' + command.parameter)
+
 		if command.parameter == "CONVERSATION" and system_online:				
 			log.info("Switch to conversation mode.")
 			lifecycle.ConversationMode()
