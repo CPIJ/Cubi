@@ -1,11 +1,16 @@
-poweroff_theme = [
-    'C5W',
-    'E5W',
-    'G5W',
-]
+music = {
+    "power_on": [ 'C5s', 'C6s' ],
+    "power_off": [ 'C6s', 'C5s' ],
+    "wrong": [ 'C2h' ],
+    "right": [ 'C5h' ],
+    "mode_change": [ 'C6s', 'rs', 'C6s' ]
+}
 
-poweron_theme = [
-    'G5W',
-    'E5W',
-    'C5W',
-]
+
+def get_music(name):
+	song = music.get(name)
+
+	if not song:
+		raise ValueError('Unkown song: ' + name)
+
+	return song

@@ -7,6 +7,7 @@ from config.socket_config import get_server_config
 from utillities.socket_protocol import Command, CommandType
 from utillities.classes.socket_server import SocketServer
 from utillities.classes.socket_client import SocketClient
+from utillities.music import get_music
 
 button = Button(BUTTON_GPIO_PIN, hold_time=2)
 system_state = ''
@@ -45,7 +46,14 @@ def on_message(message, sender):
 			logic_client.send(command.serialize())
 		else:
 			print('Failed to send ' + command.serialize() + ', Cubi in standby: ' + str(not system_online))
-			
+	elif command.action == "SET_COLOR":
+		log.info('Set button color: ' + command.parameter)
+		lifecycle.set_button_color(eval(command.parameter))
+
+	elif command.action == "PLAY_SOUND":
+		music = get_music(command.parameter.lower())
+		lifecycle.play_sound(music)
+
 	else:
 		log.error('Unkown command')
 
@@ -108,11 +116,12 @@ def init_logic_client():
 	server_config = get_server_config('LOGIC_SERVER')
 	logic_client = SocketClient(server_config.host, server_config.port)
 	
+	logic_client.send('READY:IO_SERVER')	
 
 def main():
 	init_button()
 	init_server()
-	init_logic_client()
+	#init_logic_client()
 		
 	pause()
 
