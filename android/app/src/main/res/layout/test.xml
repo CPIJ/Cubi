@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageButton
+        android:id="@+id/button_toggle_disgust2"
+        tools:layout_editor_absoluteX="277dp"
+        tools:layout_editor_absoluteY="388dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        app:srcCompat="@color/orange" />
+
+    <TextView
+        android:id="@+id/textView8"
+        tools:layout_editor_absoluteX="46dp"
+        tools:layout_editor_absoluteY="121dp"
+        android:layout_width="82dp"
+        android:layout_height="wrap_content"
+        android:text="Niveau"
+        android:textColor="@color/blue"
+        android:textSize="25dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView10"
+        tools:layout_editor_absoluteX="46dp"
+        tools:layout_editor_absoluteY="155dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Standaard"
+        android:textColor="@color/black_overlay"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView11"
+        tools:layout_editor_absoluteX="51dp"
+        tools:layout_editor_absoluteY="66dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="00 : 00 : 12"
+        android:textColor="@android:color/holo_blue_light"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+    <ImageButton
+        android:id="@+id/button_toggle_sad2"
+        tools:layout_editor_absoluteX="277dp"
+        tools:layout_editor_absoluteY="301dp"
+        android:layout_width="62dp"
+        android:layout_height="59dp"
+        app:srcCompat="@color/blueEmotie" />
+
+    <ImageButton
+        android:id="@+id/button_toggle_anger2"
+        tools:layout_editor_absoluteX="175dp"
+        tools:layout_editor_absoluteY="301dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        app:srcCompat="@color/red" />
+
+    <ImageButton
+        android:id="@+id/button_toggle_fear2"
+        tools:layout_editor_absoluteX="76dp"
+        tools:layout_editor_absoluteY="388dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        app:srcCompat="@color/yellow" />
+
+    <Button
+        android:id="@+id/button_Instellingen2"
+        tools:layout_editor_absoluteX="31dp"
+        tools:layout_editor_absoluteY="475dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:text="Instellingen"
+        android:textColor="@color/blue"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView12"
+        tools:layout_editor_absoluteX="51dp"
+        tools:layout_editor_absoluteY="232dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Emoties"
+        android:textColor="@color/blue"
+        android:textSize="25dp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/button_stop_gespreksmodus2"
+        android:layout_width="309dp"
+        android:layout_height="59dp"
+        android:background="@android:color/holo_blue_light"
+        android:text="Stoppen"
+        android:textColor="@android:color/white"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="47dp"
+        tools:layout_editor_absoluteY="564dp" />
+
+    <ImageButton
+        android:id="@+id/button_toggle_surprise2"
+        tools:layout_editor_absoluteX="175dp"
+        tools:layout_editor_absoluteY="390dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        app:srcCompat="@color/pink" />
+
+    <TextView
+        android:id="@+id/textView13"
+        tools:layout_editor_absoluteX="47dp"
+        tools:layout_editor_absoluteY="32dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Gespreksmodus"
+        android:textColor="@color/blue"
+        android:textSize="25dp"
+        android:textStyle="bold" />
+</android.support.constraint.ConstraintLayout>
