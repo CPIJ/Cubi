@@ -28,7 +28,7 @@ def get(name):
     for color in colors:
         switch[color["name"]] = eval(color["value"])
 
-    return switch.get(name, (0, 0, 0))
+    return switch.get(name, (255, 255, 255))
 
 
 def convert(color):
