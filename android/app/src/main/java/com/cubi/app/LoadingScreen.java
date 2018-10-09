@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 
+import com.cubi.app.Communication.Application;
+
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
@@ -23,8 +25,8 @@ public class LoadingScreen extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-
-                startActivity(new Intent(LoadingScreen.this, MainActivity.class));
+                //Application.application.control_IO("SET_MODE:STANDBY");
+                startActivity(new Intent(LoadingScreen.this, ModusScreen.class));
                 finish();
             }
         }, LOADING_SCREEN_DELAY);
