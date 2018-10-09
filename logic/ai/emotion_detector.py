@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 from keras.models import load_model
-from ai.helpers import *
+from logic.ai.helpers import *
 from statistics import mode, StatisticsError
 from threading import Thread
 from utillities.models.emotion import get_level
