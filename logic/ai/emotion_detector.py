@@ -19,7 +19,7 @@ class EmotionDetector():
             kwargs["emotion_model_path"], compile=False)
         self.emotion_target_size = self.emotion_classifier.input_shape[1:3]
         self.emotion_cache = []
-        self.min_cache_size = 10
+        self.min_cache_size = 14
         self.previous_emotion = ''
         self.is_running = False
         self.level = 1
