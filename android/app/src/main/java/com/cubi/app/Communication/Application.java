@@ -6,6 +6,8 @@ import java.net.Socket;
 public class Application extends android.app.Application {
 
     public static Application application;
+    public static Communicator communicator;
+
     private String socket_IO_Address = "192.168.250.2";
     private String socket_Logic_Address = "192.168.250.1";
     private int socket_IO_Port = 8002;
@@ -19,8 +21,8 @@ public class Application extends android.app.Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        communicator = new Communicator();
         application = this;
-
     }
 
     @Override

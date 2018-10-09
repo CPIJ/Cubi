@@ -4,7 +4,7 @@
         "port": 8000
     },
     "LOGIC_SERVER": {
-        "host": "192.168.56.1",
+        "host": "192.168.250.3",
         "port": 8001
     },
     "IO_SERVER": {

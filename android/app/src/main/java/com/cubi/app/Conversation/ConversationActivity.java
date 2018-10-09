@@ -18,7 +18,6 @@ public class ConversationActivity extends AppCompatActivity {
     Button button_stop_conversation, button_settings;
     ImageButton button_happy, button_anger, button_surprise, button_sad, button_fear, button_disgust;
 
-    Application application = Application.application;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +54,9 @@ public class ConversationActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                application.control_logic("TOGGLE_EMOTION:HAPPY");
+               //Application.application.control_logic("TOGGLE_EMOTION:HAPPY");
+               Application.communicator.control_logic("TOGGLE_EMOTION:HAPPY");
+
             }
         });
 
@@ -63,7 +64,7 @@ public class ConversationActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                application.control_logic("TOGGLE_EMOTION:ANGRY");
+                Application.application.control_logic("TOGGLE_EMOTION:ANGRY");
             }
         });
 
@@ -71,7 +72,7 @@ public class ConversationActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                application.control_logic("TOGGLE_EMOTION:SURPRISE");
+                Application.application.control_logic("TOGGLE_EMOTION:SURPRISE");
             }
         });
 
@@ -79,7 +80,7 @@ public class ConversationActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                application.control_logic("TOGGLE_EMOTION:SAD");
+                Application.application.control_logic("TOGGLE_EMOTION:SAD");
             }
         });
 
@@ -87,7 +88,7 @@ public class ConversationActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                application.control_logic("TOGGLE_EMOTION:FEAR");
+                Application.application.control_logic("TOGGLE_EMOTION:FEAR");
             }
         });
 
@@ -95,7 +96,7 @@ public class ConversationActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                application.control_logic("TOGGLE_EMOTION:DISGUST");
+                Application.application.control_logic("TOGGLE_EMOTION:DISGUST");
             }
         });
     }

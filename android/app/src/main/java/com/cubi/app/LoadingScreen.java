@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 
 import com.cubi.app.Communication.Application;
+import com.cubi.app.Communication.Communicator;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -20,7 +21,6 @@ public class LoadingScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loading_screen);
-
 
         new Handler().postDelayed(new Runnable() {
             @Override

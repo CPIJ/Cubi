@@ -15,14 +15,11 @@ import com.cubi.app.Training.TrainingActivity;
 public class ModusScreen extends AppCompatActivity {
 
     Button button_training_modus, button_gespreks_modus;
-    private Communicator communicator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modus_screen);
-
-       // communicator = new Communicator();
 
         button_training_modus = findViewById(R.id.button_trainingsmodus);
         button_gespreks_modus = findViewById(R.id.button_gespreksmodus);
@@ -32,8 +29,8 @@ public class ModusScreen extends AppCompatActivity {
             @Override
             public void onClick(View arg0) {
                // Application.application.control_IO("SET_MODE:STANDBY");
-
-                Application.application.control_IO("SET_MODE:TRAINING");
+                Application.communicator.control_IO("SET_MODE:TRAINING");
+                //Application.application.control_IO("SET_MODE:TRAINING");
                 //communicator.control_IO("SET_MODE:TRAINING");
                 startActivity(new Intent(ModusScreen.this, TrainingActivity.class));
             }
@@ -45,7 +42,8 @@ public class ModusScreen extends AppCompatActivity {
             public void onClick(View v) {
                 //Application.application.control_IO("SET_MODE:STANDBY");
                 //communicator.control_IO("SET_MODE:CONVERSATION");
-                Application.application.control_IO("SET_MODE:CONVERSATION");
+                Application.communicator.control_IO("SET_MODE:CONVERSATION");
+                //Application.application.control_IO("SET_MODE:CONVERSATION");
                 startActivity(new Intent(ModusScreen.this, ConversationActivity.class));
             }
         });
