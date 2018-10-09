@@ -25,7 +25,7 @@ public class ConversationActivity extends AppCompatActivity {
         button_stop_conversation = findViewById(R.id.button_stop_gespreksmodus);
         button_settings = findViewById(R.id.button_Instellingen);
         button_happy = findViewById(R.id.button_toggle_happy);
-        button_anger = findViewById(R.id.button_toggle_anger);
+        button_anger = findViewById(R.id.button_toggle_angry);
         button_surprise = findViewById(R.id.button_toggle_surprise);
         button_sad = findViewById(R.id.button_toggle_sad);
         button_fear = findViewById(R.id.button_toggle_fear);
@@ -64,7 +64,7 @@ public class ConversationActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Application.application.control_logic("TOGGLE_EMOTION:ANGRY");
+                Application.communicator.control_logic("TOGGLE_EMOTION:ANGRY");
             }
         });
 
@@ -72,7 +72,7 @@ public class ConversationActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Application.application.control_logic("TOGGLE_EMOTION:SURPRISE");
+                Application.communicator.control_logic("TOGGLE_EMOTION:SURPRISE");
             }
         });
 
@@ -80,7 +80,7 @@ public class ConversationActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Application.application.control_logic("TOGGLE_EMOTION:SAD");
+                Application.communicator.control_logic("TOGGLE_EMOTION:SAD");
             }
         });
 
@@ -88,7 +88,7 @@ public class ConversationActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Application.application.control_logic("TOGGLE_EMOTION:FEAR");
+                Application.communicator.control_logic("TOGGLE_EMOTION:FEAR");
             }
         });
 
@@ -96,7 +96,7 @@ public class ConversationActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Application.application.control_logic("TOGGLE_EMOTION:DISGUST");
+                Application.communicator.control_logic("TOGGLE_EMOTION:DISGUST");
             }
         });
     }

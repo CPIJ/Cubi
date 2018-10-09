@@ -33,7 +33,7 @@ public class ConversationSettingsActivity extends AppCompatActivity {
             public void onClick(View v) {
                int selected_id = radio_group.getCheckedRadioButtonId();
                 radio_b = findViewById(selected_id);
-                Application.application.control_logic("SET_LEVEL:" + radio_b.getTag());
+                Application.communicator.control_logic("SET_LEVEL:" + radio_b.getTag());
                 finish();
             }
         });

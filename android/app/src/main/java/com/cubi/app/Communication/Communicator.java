@@ -15,16 +15,16 @@ public class Communicator extends Activity {
 
     
     private String socket_IO_Address = "192.168.250.2";
-    private String socket_Logic_Address = "192.168.250.1";
+    private String socket_Logic_Address = "192.168.250.3";
     private int socket_IO_Port = 8002;
     private int socket_Logic_Port = 8001;
-    private int socket_Server = 8003;
+   // private int socket_Server = 8003;
 
     private Socket_IO_Client Client_io;
     private Socket_logic_Client Client_logic;
     private Socket socket_IO = null;
     private Socket socket_logic = null;
-    private Socket socket_server = null;
+    //private Socket socket_server = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +41,7 @@ public class Communicator extends Activity {
     public void control_logic (String message)
     {
         Client_logic = new Socket_logic_Client();
-        Client_logic.setMessage("TOGGLE_EMOTION:HAPPY");
+        Client_logic.setMessage(message);
         Client_logic.execute();
     }
 
