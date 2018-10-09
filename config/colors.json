@@ -5,5 +5,6 @@
   { "name": "blue", "value": "(0, 0, 255)", "emotion": "sad" },
   { "name": "orange", "value": "(255, 100, 0)", "emotion": "disgust" },
   { "name": "pink", "value": "(255, 100, 100)", "emotion": "surprise" },
-  { "name": "white", "value": "(255, 255, 255)", "emotion": "neutral" }
+  { "name": "white", "value": "(255, 255, 255)", "emotion": "neutral" },
+  { "name": "purple", "value": "(155, 0, 255)", "emotion": "neutral" }
 ]

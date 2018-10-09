@@ -155,6 +155,7 @@ def handle_socket_message(message, sender):
     global state
     global is_standby
     global ledstrip_client
+    global level
 
     command = Command.parse(message)
 
@@ -187,12 +188,16 @@ def handle_socket_message(message, sender):
         elif state == "STANDBY":
             is_standby = not is_standby
 
+            c = (0,0,0)
+
             if is_standby:
                 detector.stop()
+                level = 1
             else:
+                c = (255,255,255)
                 detector.start()
             
-            command = Command.create(CommandType.set_color, '(0,0,0)')
+            command = Command.create(CommandType.set_color, str(c))
             ledstrip_client.send(command.serialize())
 
         else:
