@@ -7,69 +7,72 @@
     tools:context=".Training.TrainingActivity"
     tools:layout_editor_absoluteY="25dp">
 
+    <ImageButton
+        android:id="@+id/button_toggle_training_surprise"
+        android:layout_width="60dp"
+        android:layout_height="59dp"
+        app:srcCompat="@color/pink"
+        tools:layout_editor_absoluteX="177dp"
+        tools:layout_editor_absoluteY="373dp" />
+
+    <ImageButton
+        android:id="@+id/button_toggle_training_disgust"
+        android:layout_width="60dp"
+        android:layout_height="59dp"
+        app:srcCompat="@color/orange"
+        tools:layout_editor_absoluteX="279dp"
+        tools:layout_editor_absoluteY="373dp" />
+
+    <ImageButton
+        android:id="@+id/button_toggle_training_fear"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        app:srcCompat="@color/yellow"
+        tools:layout_editor_absoluteX="77dp"
+        tools:layout_editor_absoluteY="372dp" />
+
     <TextView
         android:id="@+id/textView14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="51dp"
-        android:layout_marginTop="231dp"
-        android:layout_marginBottom="34dp"
         android:text="Emoties"
         android:textColor="@color/blue"
+        android:enabled="false"
         android:textSize="25dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/button_toggle_training_happy"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:layout_editor_absoluteX="51dp"
+        tools:layout_editor_absoluteY="231dp" />
 
     <ImageButton
         android:id="@+id/button_toggle_training_sad"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="301dp"
-        android:layout_marginEnd="72dp"
-        android:layout_marginBottom="163dp"
-        app:layout_constraintBottom_toTopOf="@+id/button_stop_trainingmodus"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button_toggle_training_angry"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@color/blueEmotie" />
+        android:layout_width="60dp"
+        android:layout_height="55dp"
+        app:srcCompat="@color/blueEmotie"
+        tools:layout_editor_absoluteX="279dp"
+        tools:layout_editor_absoluteY="301dp" />
 
     <ImageButton
         android:id="@+id/button_toggle_training_happy"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="77dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginBottom="165dp"
-        app:layout_constraintBottom_toTopOf="@+id/button_stop_trainingmodus"
-        app:layout_constraintEnd_toStartOf="@+id/button_toggle_training_angry"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView14"
-        app:srcCompat="@color/green" />
+        android:layout_width="60dp"
+        android:layout_height="55dp"
+        app:srcCompat="@color/green"
+        tools:layout_editor_absoluteX="77dp"
+        tools:layout_editor_absoluteY="299dp" />
 
     <ImageButton
         android:id="@+id/button_toggle_training_angry"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="42dp"
-        app:layout_constraintBottom_toBottomOf="@+id/button_toggle_training_sad"
-        app:layout_constraintEnd_toStartOf="@+id/button_toggle_training_sad"
-        app:layout_constraintStart_toEndOf="@+id/button_toggle_training_happy"
-        app:layout_constraintTop_toTopOf="@+id/button_toggle_training_sad"
-        app:srcCompat="@color/red" />
+        android:layout_width="60dp"
+        android:layout_height="55dp"
+        app:srcCompat="@color/red"
+        tools:layout_editor_absoluteX="177dp"
+        tools:layout_editor_absoluteY="301dp" />
 
     <Button
         android:id="@+id/button_stop_trainingmodus"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="72dp"
-        android:layout_marginEnd="72dp"
-        android:layout_marginBottom="84dp"
+        android:layout_width="267dp"
+        android:layout_height="55dp"
         android:background="@android:color/holo_blue_light"
         android:text="Stoppen"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_toggle_training_sad" />
+        tools:layout_editor_absoluteX="72dp"
+        tools:layout_editor_absoluteY="519dp" />
 </android.support.constraint.ConstraintLayout>

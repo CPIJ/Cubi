@@ -2,24 +2,24 @@ package com.cubi.app;
 
 public class Emotion
 {
-    private static String name;
-    private static boolean blacklisted;
+    private String name;
+    private boolean blacklisted;
 
-    public Emotion (String name,  boolean blacklisted)
+    public Emotion (String name)
     {
         this.name = name;
-        this.blacklisted = blacklisted;
+        this.blacklisted = false;
     }
 
-    public static String getName() {
+    public String getName() {
         return name;
     }
 
-    public static boolean isBlacklisted() {
+    public boolean isBlacklisted() {
         return blacklisted;
     }
 
-    public static void setBlacklisted(boolean blacklisted) {
-        Emotion.blacklisted = blacklisted;
+    public void setBlacklisted(boolean bool) {
+        blacklisted = bool;
     }
 }

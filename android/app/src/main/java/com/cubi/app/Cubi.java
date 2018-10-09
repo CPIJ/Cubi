@@ -8,10 +8,25 @@ public class Cubi
 {
     private String state = "";
     private ArrayList<Emotion> blacklist;
+    private ArrayList<Emotion> emotions;
+
+    private void addEmotions()
+    {
+        emotions.add(new Emotion("HAPPY"));
+        emotions.add(new Emotion("ANGRY"));
+        emotions.add(new Emotion("DISGUST"));
+        emotions.add(new Emotion("SURPRISE"));
+        emotions.add(new Emotion("FEAR"));
+        emotions.add(new Emotion("SAD"));
+
+    }
+
 
     public Cubi ()
     {
         blacklist = new ArrayList<>();
+        emotions = new ArrayList<>();
+        addEmotions();
     }
 
 
@@ -21,7 +36,7 @@ public class Cubi
 
     public Emotion findEmotion(String emotionName)
     {
-        for (Emotion e : blacklist)
+        for (Emotion e : emotions)
         {
             if (e.getName() == emotionName)
             {
@@ -48,8 +63,9 @@ public class Cubi
     {
         if(!checkInBlacklist(emotion))
         {
-            blacklist.add(emotion);
+           if( blacklist.add(emotion)) emotion.setBlacklisted(true);
         }
+
     }
 
     public void deleteEmotionFromBlacklist(Emotion emotion)
@@ -58,7 +74,7 @@ public class Cubi
         {
             return;
         }
-        blacklist.remove(emotion);
+        if(blacklist.remove(emotion)) emotion.setBlacklisted(false);
     }
 
     public void ToggleEmotionBlacklisted(String emotionName)
