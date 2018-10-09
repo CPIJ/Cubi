@@ -115,7 +115,7 @@ def blink(color):
 
         sleep(1)
 
-        command = Command.create(CommandType.set_color, str((0, 0, 0)))
+        command = Command.create(CommandType.set_color, str(colors.get('white')))
         ledstrip_client.send(command.serialize())
         io_client.send(command.serialize())
 
@@ -183,6 +183,7 @@ def handle_socket_message(message, sender):
             detector.start()
 
         elif state == "TRAINING":
+            detector.emotion_cache.clear()
             training_cycle()
 
         elif state == "STANDBY":

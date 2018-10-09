@@ -47,8 +47,8 @@ def get_emotion_color(name, level):
         },
         'neutral': {
             1: colors.get('white'),
-            2: (0, 0, 0),
-            3: (0, 0, 0)
+            2: colors.get('white'),
+            3: colors.get('white')
         },
     }
 
