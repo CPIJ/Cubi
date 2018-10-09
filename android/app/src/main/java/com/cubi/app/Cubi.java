@@ -1,12 +1,13 @@
 package com.cubi.app;
 
+import com.cubi.app.Communication.Application;
+
 import java.util.ArrayList;
-import java.util.List;
 
 public class Cubi
 {
     private String state = "";
-    private ArrayList<String> blacklist;
+    private ArrayList<Emotion> blacklist;
 
     public Cubi ()
     {
@@ -14,15 +15,28 @@ public class Cubi
     }
 
 
-    public ArrayList<String> getBlacklist() {
+    public ArrayList<Emotion> getBlacklist() {
         return blacklist;
     }
 
-    public boolean checkifInBlacklist(String emotion)
+    public Emotion findEmotion(String emotionName)
     {
-        for (String e : blacklist)
+        for (Emotion e : blacklist)
         {
-            if (e == emotion)
+            if (e.getName() == emotionName)
+            {
+                return e;
+            }
+        }
+        return null;
+    }
+
+
+    public boolean checkInBlacklist(Emotion emotion)
+    {
+        for (Emotion e : blacklist)
+        {
+            if (e.getName() == emotion.getName())
             {
                 return true;
             }
@@ -30,22 +44,37 @@ public class Cubi
         return false;
     }
 
-    public void addEmotionToBlacklist(String emotion)
+    public void addEmotionToBlacklist(Emotion emotion)
     {
-        if(!checkifInBlacklist(emotion))
+        if(!checkInBlacklist(emotion))
         {
             blacklist.add(emotion);
         }
     }
 
-    public void deleteEmotionFromBlacklist(String emotion)
+    public void deleteEmotionFromBlacklist(Emotion emotion)
     {
-        if(!checkifInBlacklist(emotion))
+        if(!checkInBlacklist(emotion))
         {
             return;
         }
         blacklist.remove(emotion);
     }
+
+    public void ToggleEmotionBlacklisted(String emotionName)
+    {
+        Emotion emotion = findEmotion(emotionName);
+        if(checkInBlacklist(emotion))
+        {
+            deleteEmotionFromBlacklist(emotion);
+        }
+        else
+        {
+            addEmotionToBlacklist(emotion);
+        }
+        Application.communicator.control_logic("TOGGLE_EMOTION:" + emotionName);
+    }
+
 
 
 

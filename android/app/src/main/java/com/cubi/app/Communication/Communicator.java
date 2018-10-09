@@ -45,6 +45,20 @@ public class Communicator extends Activity {
         Client_logic.execute();
     }
 
+    public  void CloseSockets()
+    {
+        try
+        {
+            socket_IO.close();
+            socket_logic.close();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+
     public class Socket_logic_Client extends AsyncTask<Void, Void, Void> {
         private String message = "";
         private PrintWriter printWriter = null;

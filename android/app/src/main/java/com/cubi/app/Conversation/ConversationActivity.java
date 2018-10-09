@@ -18,6 +18,38 @@ public class ConversationActivity extends AppCompatActivity {
     Button button_stop_conversation, button_settings;
     ImageButton button_happy, button_anger, button_surprise, button_sad, button_fear, button_disgust;
 
+    private void updateUI()
+    {
+        if(Application.cubi.findEmotion("HAPPY").isBlacklisted())
+        {
+            button_happy. = false;
+        }
+
+        if(Application.cubi.findEmotion("ANGRY").isBlacklisted())
+        {
+            //button_anger
+        }
+
+        if(Application.cubi.findEmotion("SURPRISE").isBlacklisted())
+        {
+        }
+
+        if(Application.cubi.findEmotion("SAD").isBlacklisted())
+        {
+        }
+
+        if(Application.cubi.findEmotion("FEAR").isBlacklisted())
+        {
+        }
+
+        if(Application.cubi.findEmotion("DISGUST").isBlacklisted())
+        {
+
+        }
+
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +62,8 @@ public class ConversationActivity extends AppCompatActivity {
         button_sad = findViewById(R.id.button_toggle_sad);
         button_fear = findViewById(R.id.button_toggle_fear);
         button_disgust = findViewById(R.id.button_toggle_disgust);
+
+        updateUI();
 
 
         button_stop_conversation.setOnClickListener(new View.OnClickListener() {
@@ -55,7 +89,8 @@ public class ConversationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                //Application.application.control_logic("TOGGLE_EMOTION:HAPPY");
-               Application.communicator.control_logic("TOGGLE_EMOTION:HAPPY");
+              // Application.communicator.control_logic("TOGGLE_EMOTION:HAPPY");
+               Application.cubi.ToggleEmotionBlacklisted("HAPPY");
 
             }
         });
@@ -64,7 +99,8 @@ public class ConversationActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Application.communicator.control_logic("TOGGLE_EMOTION:ANGRY");
+                //Application.communicator.control_logic("TOGGLE_EMOTION:ANGRY");
+                Application.cubi.ToggleEmotionBlacklisted("ANGRY");
             }
         });
 
@@ -72,7 +108,8 @@ public class ConversationActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Application.communicator.control_logic("TOGGLE_EMOTION:SURPRISE");
+                Application.cubi.ToggleEmotionBlacklisted("SURPRISE");
+               // Application.communicator.control_logic("TOGGLE_EMOTION:SURPRISE");
             }
         });
 
@@ -80,7 +117,8 @@ public class ConversationActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Application.communicator.control_logic("TOGGLE_EMOTION:SAD");
+               // Application.communicator.control_logic("TOGGLE_EMOTION:SAD");
+                Application.cubi.ToggleEmotionBlacklisted("SAD");
             }
         });
 
@@ -88,7 +126,8 @@ public class ConversationActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Application.communicator.control_logic("TOGGLE_EMOTION:FEAR");
+                //Application.communicator.control_logic("TOGGLE_EMOTION:FEAR");
+                Application.cubi.ToggleEmotionBlacklisted("FEAR");
             }
         });
 
@@ -96,7 +135,8 @@ public class ConversationActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Application.communicator.control_logic("TOGGLE_EMOTION:DISGUST");
+                //Application.communicator.control_logic("TOGGLE_EMOTION:DISGUST");
+                Application.cubi.ToggleEmotionBlacklisted("DISGUST");
             }
         });
     }
