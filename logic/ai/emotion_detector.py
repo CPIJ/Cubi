@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 from keras.models import load_model
-from ai.helpers import *
+from logic.ai.helpers import *
 from statistics import mode, StatisticsError
 from threading import Thread
 from utillities.models.emotion import get_level
@@ -19,7 +19,7 @@ class EmotionDetector():
             kwargs["emotion_model_path"], compile=False)
         self.emotion_target_size = self.emotion_classifier.input_shape[1:3]
         self.emotion_cache = []
-        self.min_cache_size = 10
+        self.min_cache_size = 14
         self.previous_emotion = ''
         self.is_running = False
         self.level = 1
