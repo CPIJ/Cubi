@@ -19,7 +19,7 @@ def get_color(emotion_name):
         emotion = next((filter(lambda emotion: emotion.name == emotion_name, [x[1] for x in emotions.items()])))
         return emotion.color
     except:
-        print(f'{emotion_name} does not exist')
+        print('{emotion_name} does not exist'.format(emotion_name=emotion_name))
         return False
 
 

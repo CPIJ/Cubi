@@ -11,20 +11,8 @@
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
         android:autoLink="web"
-        android:text="http://androidSRC.net/"
+        android:text="http://www.google.com/"
         android:textStyle="bold" />
-
-    <EditText
-        android:id="@+id/addressEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Server ip address" />
-
-    <EditText
-        android:id="@+id/portEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Server port number" />
 
     <Button
         android:id="@+id/connectButton"
@@ -34,10 +22,21 @@
         android:text="Connect..." />
 
     <Button
-        android:id="@+id/clearButton"
+        android:id="@+id/conversationButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Clear" />
+        android:text="Conversation mode !" />
+
+    <Button
+        android:id="@+id/trainingButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Training mode !" />
+    <Button
+        android:id="@+id/levelButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Set Level !" />
 
     <TextView
         android:id="@+id/responseTextView"
