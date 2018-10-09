@@ -189,12 +189,11 @@ def handle_socket_message(message, sender):
 
             if is_standby:
                 detector.stop()
-                command = Command.create(CommandType.set_color, '(0,0,0)')
-                ledstrip_client.send(command.serialize())
             else:
                 detector.start()
-                command = Command.create(CommandType.set_color, '(25,25,25)')
-                ledstrip_client.send(command.serialize())
+            
+            command = Command.create(CommandType.set_color, '(0,0,0)')
+            ledstrip_client.send(command.serialize())
 
         else:
             log.error('Unkown state: ' + state)
