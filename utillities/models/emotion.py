@@ -18,32 +18,32 @@ def get_emotion_color(name, level):
         'angry': {
             1: colors.get('red'),
             2: colors.get('red'),
-            3: colors.get('white')
+            3: colors.get('purple')
         },
         'disgust': {
             1: colors.get('orange'),
             2: colors.get('red'),
-            3: colors.get('white')
+            3: colors.get('purple')
         },
         'fear': {
             1: colors.get('yellow'),
             2: colors.get('red'),
-            3: colors.get('white')
+            3: colors.get('purple')
         },
         'happy': {
             1: colors.get('green'),
             2: colors.get('green'),
-            3: colors.get('white')
+            3: colors.get('purple')
         },
         'sad': {
             1: colors.get('blue'),
             2: colors.get('red'),
-            3: colors.get('white')
+            3: colors.get('purple')
         },
         'surprise': {
             1: colors.get('pink'),
             2: colors.get('green'),
-            3: colors.get('white')
+            3: colors.get('purple')
         },
         'neutral': {
             1: colors.get('white'),
@@ -86,6 +86,6 @@ def get_level(n):
     level = switch.get(n)
 
     if level is None:
-        raise ValueError('Unkown level: ' + n)
+        raise ValueError('Unkown level: ' + str(n))
 
     return level
