@@ -65,11 +65,13 @@ def handle_emotion(emotion):
     if state == "TRAINING":
         if emotion == training_emotion:
             log.debug('Guessed correctly')
-            handle_training_result(colors.get('green'))
+            io_client.send('PLAY_SOUND:RIGHT')
+            handle_training_result(emotion.color)
 
         else:
             log.debug('Guessed not correctly, canceled timer.')
-            handle_training_result(colors.get('red'))
+            io_client.send('PLAY_SOUND:WRONG')
+            handle_training_result(emotion.color)
 
     elif state == "CONVERSATION":
         if not emotion.enabled:
@@ -119,6 +121,12 @@ def blink(color):
 
         sleep(1)
 
+def get_random_emotion(whitelist = ['happy', 'angry', 'surprise']):
+    emotions = [dictionary[1] for dictionary in get_level(1).items()]
+    filtered = filter(lambda emotion: emotion.name in whitelist, emotions)
+
+    return random.choice(list(filtered))
+    
 
 def training_cycle():
     log.debug('Entering training cycle.')
@@ -128,8 +136,7 @@ def training_cycle():
     detector.stop()
     log.debug('Stopped detector.')
 
-    training_emotion = random.choice(list(
-        (filter(lambda emotion: emotion.enabled, [x[1] for x in get_level(1).items()]))))
+    training_emotion = get_random_emotion()
     log.debug('Random choice: ' + str(training_emotion.name))
 
     command = Command.create(CommandType.set_color, str(training_emotion.color))
@@ -217,9 +224,6 @@ def start_ledstrip_client():
     log.debug('Connecting to LED_SERVER at ' + str(server_config))
     ledstrip_client = SocketClient(server_config.host, server_config.port)
     log.debug('LED_SERVER Connected')
-
-
-
 
 
 def init_detector():
