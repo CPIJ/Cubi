@@ -12,14 +12,14 @@
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="51dp"
-        android:layout_marginEnd="261dp"
-        android:text="00 : 00 : 12"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="27dp"
+        android:text="00 : 00 : 00"
         android:textColor="@android:color/holo_blue_light"
         android:textSize="20dp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textView5"
+        app:layout_constraintStart_toStartOf="@+id/textView7"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
     <TextView
@@ -28,43 +28,43 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="47dp"
         android:layout_marginTop="32dp"
-        android:layout_marginEnd="179dp"
-        android:text="Gespreksmodus"
+        android:layout_marginEnd="47dp"
+        android:layout_marginBottom="235dp"
         android:enabled="false"
+        android:text="Gespreksmodus"
         android:textColor="@color/blue"
         android:textSize="25dp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/button_toggle_angry"
+        app:layout_constraintEnd_toStartOf="@+id/button_toggle_sad"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/textView_niveau"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="46dp"
-        android:layout_marginEnd="273dp"
+        android:layout_marginBottom="50dp"
         android:text="Standaard"
         android:textColor="@color/black_overlay"
         android:textSize="20dp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textView4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <TextView
         android:id="@+id/textView5"
-        android:layout_width="82dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="46dp"
-        android:layout_marginTop="27dp"
-        android:layout_marginEnd="283dp"
         android:text="Niveau"
         android:textColor="@color/blue"
         android:textSize="25dp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textView_niveau"
+        app:layout_constraintEnd_toEndOf="@+id/button_Instellingen"
+        app:layout_constraintStart_toStartOf="@+id/textView_niveau"
         app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
     <TextView
@@ -72,89 +72,98 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="51dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="268dp"
+        android:layout_marginBottom="34dp"
         android:text="Emoties"
         android:textColor="@color/blue"
         android:textSize="25dp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/button_toggle_happy"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_niveau" />
 
 
     <ImageButton
         android:id="@+id/button_toggle_happy"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginStart="76dp"
-        android:layout_marginTop="34dp"
+        android:layout_marginEnd="41dp"
+        android:layout_marginBottom="28dp"
+        app:layout_constraintBottom_toTopOf="@+id/button_toggle_fear"
+        app:layout_constraintEnd_toStartOf="@+id/button_toggle_angry"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4"
         app:srcCompat="@color/green" />
 
     <ImageButton
         android:id="@+id/button_toggle_fear"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginStart="76dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginEnd="39dp"
+        android:layout_marginBottom="27dp"
+        app:layout_constraintBottom_toTopOf="@+id/button_Instellingen"
+        app:layout_constraintEnd_toStartOf="@+id/button_toggle_surprise"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_toggle_happy"
         app:srcCompat="@color/yellow" />
 
     <ImageButton
         android:id="@+id/button_toggle_disgust"
-        android:layout_width="60dp"
-        android:layout_height="59dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginEnd="74dp"
         android:layout_marginBottom="110dp"
         app:layout_constraintBottom_toTopOf="@+id/button_stop_gespreksmodus"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button_toggle_surprise"
+        app:layout_constraintTop_toBottomOf="@+id/button_toggle_sad"
         app:srcCompat="@color/orange" />
 
     <ImageButton
         android:id="@+id/button_toggle_surprise"
-        android:layout_width="60dp"
-        android:layout_height="59dp"
-        android:layout_marginStart="39dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginEnd="42dp"
-        android:layout_marginBottom="107dp"
-        app:layout_constraintBottom_toTopOf="@+id/button_stop_gespreksmodus"
+        android:layout_marginBottom="210dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/button_toggle_disgust"
         app:layout_constraintStart_toEndOf="@+id/button_toggle_fear"
+        app:layout_constraintTop_toBottomOf="@+id/button_toggle_angry"
         app:srcCompat="@color/pink" />
 
     <ImageButton
         android:id="@+id/button_toggle_angry"
-        android:layout_width="61dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="235dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginEnd="42dp"
+        android:layout_marginBottom="28dp"
+        app:layout_constraintBottom_toTopOf="@+id/button_toggle_surprise"
         app:layout_constraintEnd_toStartOf="@+id/button_toggle_sad"
+        app:layout_constraintStart_toEndOf="@+id/button_toggle_happy"
         app:layout_constraintTop_toBottomOf="@+id/textView7"
         app:srcCompat="@color/red" />
 
     <ImageButton
         android:id="@+id/button_toggle_sad"
-        android:layout_width="61dp"
-        android:layout_height="59dp"
-        android:layout_marginTop="301dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="300dp"
         android:layout_marginEnd="72dp"
-        android:layout_marginBottom="27dp"
+        android:layout_marginBottom="26dp"
         app:layout_constraintBottom_toTopOf="@+id/button_toggle_disgust"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button_toggle_angry"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@color/blueEmotie" />
 
     <Button
         android:id="@+id/button_stop_gespreksmodus"
-        android:layout_width="309dp"
-        android:layout_height="59dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginStart="51dp"
-        android:layout_marginTop="34dp"
         android:layout_marginEnd="51dp"
-        android:layout_marginBottom="43dp"
+        android:layout_marginBottom="44dp"
         android:background="@android:color/holo_blue_light"
         android:enabled="false"
         android:text="Stoppen"
@@ -164,20 +173,19 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_Instellingen" />
+        app:layout_constraintTop_toBottomOf="@+id/button_toggle_disgust" />
 
     <Button
         android:id="@+id/button_Instellingen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="31dp"
-        android:layout_marginTop="27dp"
-        android:layout_marginEnd="283dp"
+        android:layout_marginBottom="34dp"
         android:background="@color/white"
         android:text="Instellingen"
         android:textColor="@color/blue"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/button_stop_gespreksmodus"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_toggle_fear" />
 

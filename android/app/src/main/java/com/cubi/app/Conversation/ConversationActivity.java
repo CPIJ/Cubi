@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.cubi.app.Communication.Application;
 import com.cubi.app.R;
@@ -15,6 +16,15 @@ public class ConversationActivity extends AppCompatActivity {
 
     Button button_stop_conversation, button_settings;
     ImageButton button_happy, button_angry, button_surprise, button_sad, button_fear, button_disgust;
+    TextView textView_niveau;
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        updateUI();
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +38,7 @@ public class ConversationActivity extends AppCompatActivity {
         button_sad = findViewById(R.id.button_toggle_sad);
         button_fear = findViewById(R.id.button_toggle_fear);
         button_disgust = findViewById(R.id.button_toggle_disgust);
+        textView_niveau = findViewById(R.id.textView_niveau);
 
         updateUI();
 
@@ -141,6 +152,25 @@ public class ConversationActivity extends AppCompatActivity {
             button_disgust.setImageResource(R.drawable.ic_visibility);
         }
         else button_disgust.setImageResource(R.color.orange);
+
+        updateNiveau();
     }
 
+    private void updateNiveau()
+    {
+        int niveau = Application.cubi.getNiveau();
+        if(niveau == 1)
+        {
+            textView_niveau.setText("Standaard");
+        }
+        else if (niveau == 2)
+        {
+            textView_niveau.setText("Alleen positief en negatief");
+        }
+
+        else if (niveau == 3)
+        {
+            textView_niveau.setText("Er wordt een emotie getoond maar Cubi zal niet laten zien welke Emotie getoond wordt");
+        }
+    }
 }

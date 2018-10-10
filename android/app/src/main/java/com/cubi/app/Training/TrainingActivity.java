@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.cubi.app.Communication.Application;
 import com.cubi.app.R;
@@ -13,6 +14,7 @@ public class TrainingActivity extends AppCompatActivity {
 
     Button button_stop_training;
     ImageButton button_happy, button_angry, button_surprise, button_sad, button_fear, button_disgust;
+    TextView textView_niveau;
 
 
     @Override
@@ -23,10 +25,11 @@ public class TrainingActivity extends AppCompatActivity {
         button_stop_training = findViewById(R.id.button_stop_trainingmodus);
         button_happy = findViewById(R.id.button_toggle_training_happy);
         button_angry = findViewById(R.id.button_toggle_training_angry);
-        button_surprise = findViewById(R.id.button_toggle_surprise);
+        button_surprise = findViewById(R.id.button_toggle_training_surprise);
         button_sad = findViewById(R.id.button_toggle_training_sad);
         button_fear = findViewById(R.id.button_toggle_training_fear);
         button_disgust = findViewById(R.id.button_toggle_training_disgust);
+        textView_niveau = findViewById(R.id.textView_training_niveau);
 
         button_stop_training.setOnClickListener(new View.OnClickListener() {
 
@@ -41,8 +44,8 @@ public class TrainingActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                // Application.application.control_IO("SET_MODE:STANDBY");
-                Application.communicator.control_logic("TOGGLE_EMOTION:HAPPY");
+                Application.cubi.ToggleEmotionBlacklisted("HAPPY");
+                updateUI();
             }
         });
 
@@ -50,8 +53,8 @@ public class TrainingActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                // Application.application.control_IO("SET_MODE:STANDBY");
-                Application.communicator.control_logic("TOGGLE_EMOTION:ANGRY");
+                Application.cubi.ToggleEmotionBlacklisted("ANGRY");
+                updateUI();
             }
         });
 
@@ -59,8 +62,9 @@ public class TrainingActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                // Application.application.control_IO("SET_MODE:STANDBY");
-                Application.communicator.control_logic("TOGGLE_EMOTION:SAD");
+                Application.cubi.ToggleEmotionBlacklisted("SAD");
+                updateUI();
+
             }
         });
 
@@ -93,7 +97,6 @@ public class TrainingActivity extends AppCompatActivity {
         else button_happy.setImageResource(R.color.green);
 
         if(Application.cubi.findEmotion("ANGRY").isBlacklisted()) {
-            //button_angry
             button_angry.setImageResource(R.drawable.ic_visibility);
         }
         else button_angry.setImageResource(R.color.red);
@@ -121,5 +124,24 @@ public class TrainingActivity extends AppCompatActivity {
             button_disgust.setImageResource(R.drawable.ic_visibility);
         }
         else button_disgust.setImageResource(R.color.orange);
+        updateNiveau();
+    }
+
+    private void updateNiveau()
+    {
+        int niveau = Application.cubi.getNiveau();
+        if(niveau == 1)
+        {
+            textView_niveau.setText("Standaard");
+        }
+        else if (niveau == 2)
+        {
+            textView_niveau.setText("Alleen positief en negatief");
+        }
+
+        else if (niveau == 3)
+        {
+            textView_niveau.setText("Er wordt een emotie getoond maar Cubi zal niet laten zien welke Emotie getoond wordt");
+        }
     }
 }

@@ -9,6 +9,7 @@ public class Cubi
     private String state = "";
     private ArrayList<Emotion> blacklist;
     private ArrayList<Emotion> emotions;
+    private int niveau;
 
     private void addEmotions()
     {
@@ -21,9 +22,9 @@ public class Cubi
 
     }
 
-
     public Cubi ()
     {
+        niveau = 2;
         blacklist = new ArrayList<>();
         emotions = new ArrayList<>();
         addEmotions();
@@ -91,8 +92,19 @@ public class Cubi
         Application.communicator.control_logic("TOGGLE_EMOTION:" + emotionName);
     }
 
+    public void control_niveau(int Niveau)
+    {
+        if (Niveau > 0 && Niveau < 4) {
+            setNiveau(Niveau);
+            Application.communicator.control_logic("SET_LEVEL:" + Niveau);
+        }
+    }
 
+    public int getNiveau() {
+        return niveau;
+    }
 
-
-
+    public void setNiveau(int niveau) {
+        this.niveau = niveau;
+    }
 }

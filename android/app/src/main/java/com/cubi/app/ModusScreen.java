@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.cubi.app.Communication.Application;
 import com.cubi.app.Conversation.ConversationActivity;
@@ -12,7 +13,7 @@ import com.cubi.app.Training.TrainingActivity;
 
 public class ModusScreen extends AppCompatActivity {
 
-    Button button_training_modus, button_gespreks_modus;
+    ImageButton button_training_modus, button_gespreks_modus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
